@@ -107,7 +107,7 @@ class ClinicController extends Controller
     }
     public function gallery(Request $request)
     {
-          auth()->user()->doctor->clinic->gallery()->create(['url'=>$request->file->store('storage/clinic')]);
+          auth()->user()->doctor->clinic->gallery()->create(['url'=>sorteimage('storage/clinic',$request->file)]);
     }
     public function delete(Request $request)
     {

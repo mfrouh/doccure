@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'phone_number'=>'0'.rand(1000000000,1299999999),
             'gender'=>$this->faker->randomElement(['male','female']),
             'date_of_birth'=>$this->faker->date,
-            'image'=>'storage/patient/1.png',
+            'image'=>'storage/person/1.png',
         ];
     }
 }

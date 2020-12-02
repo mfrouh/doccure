@@ -176,10 +176,11 @@ class SettingController extends Controller
       $user->phone_number=$request->phone_number;
       if($request->image)
       {
-        $user->image=$request->image->store('storage/person');
+        $user->image=sorteimage('storage/person',$request->image);
       }
       $user->save();
       return back();
     }
+
 
 }

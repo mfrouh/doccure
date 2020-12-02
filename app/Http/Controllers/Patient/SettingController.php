@@ -60,7 +60,7 @@ class SettingController extends Controller
       $user->date_of_birth=$request->date_of_birth;
       if($request->image)
       {
-        $user->image=$request->image->store('storage/person');
+        $user->image=sorteimage('storage/person',$request->image);
       }
       $user->save();
       $patient=Patient::where('user_id',auth()->user()->id)->first();

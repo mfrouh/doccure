@@ -25,7 +25,7 @@ class CreateAppointmentsTable extends Migration
             $table->time('booking_time');
             $table->integer('price');
             $table->boolean('attend')->default(0);
-            $table->text('case',255)->nullable();
+            $table->text('diagnose',255)->nullable();
             $table->enum('state',['confirm','cancel','pending'])->default('pending');
             $table->timestamps();
         });

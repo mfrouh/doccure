@@ -21,5 +21,9 @@ class Appointment extends Model
     {
         return $this->hasMany('App\Models\FollowUp');
     }
+    public function prescriptions()
+    {
+        return $this->hasMany('App\Models\Prescription');
+    }
 
 }

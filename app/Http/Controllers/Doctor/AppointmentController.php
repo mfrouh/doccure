@@ -33,5 +33,14 @@ class AppointmentController extends Controller
       $appointment->save();
       return back()->with('success','Change Appointment State');
     }
+    public function show(Appointment $appointment)
+    {
+       if ($appointment->clinic_id==auth()->user()->doctor->clinic->id)
+       {
+        return view('doctor.main.appointment',compact('appointment'));
+       }
+        return abort('404');
+    }
+
 
 }

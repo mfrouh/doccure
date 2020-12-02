@@ -13,8 +13,8 @@
             <input type="checkbox" name="attend" >
           </div>
           <div class="col-md-12">
-            <label for="">Case Have</label>
-            <textarea class="form-control" rows="4"></textarea>
+            <label for="">Diagnose</label>
+            <textarea class="form-control" name="diagnose" rows="4"></textarea>
           </div>
       </div>
   </div>
@@ -22,16 +22,19 @@
 <div class="card">
   <div class="card-header">FollowUp</div>
   <div class="card-body">
+      {{$appointment->followups}}
   </div>
 </div>
 <div class="card">
   <div class="card-header">Prescription</div>
   <div class="card-body">
+    {{$appointment->prescriptions}}
   </div>
 </div>
 <div class="card">
   <div class="card-header">Surgeries</div>
   <div class="card-body">
+    {{$appointment->surgeries}}
   </div>
 </div>
 @endsection

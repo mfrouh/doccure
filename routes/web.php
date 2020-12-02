@@ -48,8 +48,9 @@ Route::group(['prefix' => 'doctor','middleware'=>['auth','Checkrole:doctor']], f
     //Doctor my-patients
     Route::get('my-patients', 'Doctor\MainController@mypatients');
     //Doctor appointments
-    Route::get('appointments', 'Doctor\MainController@appointments');
-    Route::post('appointment/changestate', 'Doctor\MainController@changestate');
+    Route::get('appointments', 'Doctor\AppointmentController@index');
+    Route::get('appointment/{appointment}', 'Doctor\AppointmentController@show');
+    Route::post('appointment/changestate', 'Doctor\AppointmentController@changestate');
     //Doctor social-media
     Route::get('social-media', 'Doctor\MainController@socialmedia');
     Route::post('social-media', 'Doctor\MainController@postsocialmedia');
@@ -83,7 +84,7 @@ Route::group(['prefix' => 'doctor','middleware'=>['auth','Checkrole:doctor']], f
     Route::post('/clinic/gallery', 'Doctor\ClinicController@gallery');
     //Doctor prescription
     Route::get('prescriptions', 'Doctor\PrescriptionController@index');
-    Route::get('prescription/show/{id}', 'Doctor\PrescriptionController@show');
+    Route::get('prescription/{id}', 'Doctor\PrescriptionController@show');
     //Doctor prescription_content
     Route::resource('prescriptioncontent', 'Doctor\PrescriptionContentController');
     //Doctor surgery

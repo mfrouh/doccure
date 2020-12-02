@@ -19,6 +19,7 @@ class CreateFollowUpsTable extends Migration
             $table->time('time');
             $table->integer('price')->nullable();
             $table->boolean('attend')->default(0);
+            $table->text('diagnose',255)->nullable();
             $table->foreignId('appointment_id');
             $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

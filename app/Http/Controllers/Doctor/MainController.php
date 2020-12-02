@@ -22,12 +22,6 @@ class MainController extends Controller
        return view('doctor.main.my-patients',compact('patients'));
     }
 
-    public function appointments()
-    {
-       $appointments=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->get();
-       return view('doctor.main.appointments',compact('appointments'));
-    }
-
     public function reviews()
     {
        return view('doctor.main.reviews');

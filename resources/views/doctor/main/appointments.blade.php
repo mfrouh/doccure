@@ -29,7 +29,7 @@
                         <td class="text-center"> {{$appointment->price}}</td>
                         <td class="text-right">
                             <div class="table-action">
-                                <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                <a href="/doctor/appointment/{{$appointment->id}}" class="btn btn-sm bg-info-light">
                                     <i class="far fa-eye"></i> View
                                 </a>
                                 <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
