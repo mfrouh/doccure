@@ -27,11 +27,12 @@ class PrescriptionController extends Controller
     public function show($id)
     {
         $appointment=Appointment::findOrfail($id);
-        $prescription=Prescription::firstOrcreate([
+        $appointment->prescription()->
+        firstOrcreate([
             'clinic_id'=>$appointment->clinic_id,
             'patient_id'=>$appointment->patient_id,
-            'appointment_id'=>$appointment->id,
         ]);
+        $prescription=$appointment->prescription;
         return view('doctor.prescription.create',compact('prescription'));
     }
 

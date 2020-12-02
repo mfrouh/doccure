@@ -11,10 +11,10 @@
                       @csrf
                     </form>
                 </div>
-                <div class="upload-wrap">
+                <div class="row upload-wrap">
                     @foreach (auth()->user()->doctor->clinic->gallery as $image)
-                    <div class="upload-images">
-                        <img src="{{asset($image->url)}}">
+                    <div class="col-2 upload-images">
+                        <img src="{{asset($image->url)}}" >
                         <a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
                     </div>
                     @endforeach

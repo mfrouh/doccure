@@ -21,9 +21,14 @@ class Appointment extends Model
     {
         return $this->hasMany('App\Models\FollowUp');
     }
-    public function prescriptions()
+    public function prescription()
     {
-        return $this->hasMany('App\Models\Prescription');
+        return $this->morphOne('App\Models\Prescription','prescriptionable');
     }
+    public function surgeries()
+    {
+        return $this->morphMany('App\Models\Surgery','surgeryable');
+    }
+
 
 }

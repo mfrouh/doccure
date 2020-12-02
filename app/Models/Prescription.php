@@ -9,12 +9,11 @@ class Prescription extends Model
 {
     use HasFactory;
     protected $fillable = [
-       'clinic_id','patient_id','appointment_id',
+       'clinic_id','patient_id','prescriptionable_id','prescriptionable_type',
     ];
-
-    public function appointment()
+    public function prescriptionable()
     {
-        return $this->belongsTo('App\Models\Appointment');
+      return $this->morphTo();
     }
     public function clinic()
     {
