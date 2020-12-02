@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Controllers\Doctor;
+
+use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use Illuminate\Http\Request;
+
+class AppointmentController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $appointments=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->get();
+        return view('doctor.main.appointments',compact('appointments'));
+    }
+
+    public function changestate(Request $request)
+    {
+      $appointment=Appointment::where('id',$request->id)->first();
+      $appointment->state=$request->state;
+      $appointment->save();
+      return back()->with('success','Change Appointment State');
+    }
+    public function attend(Request $request)
+    {
+      $appointment=Appointment::where('id',$request->id)->first();
+      $appointment->state=$request->state;
+      $appointment->save();
+      return back()->with('success','Change Appointment State');
+    }
+
+}
