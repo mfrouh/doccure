@@ -9,6 +9,15 @@ class Appointment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'patient_id',
+        'clinic_id',
+        'day',
+        'booking_day',
+        'time',
+        'boojing_time',
+        'id'
+    ];
     public function patient()
     {
         return $this->belongsTo('App\Models\Patient');

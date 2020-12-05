@@ -26,12 +26,13 @@ class AppointmentController extends Controller
       $appointment->save();
       return back()->with('success','Change Appointment State');
     }
-    public function attend(Request $request)
+    public function diagnose(Request $request)
     {
-      $appointment=Appointment::where('id',$request->id)->first();
-      $appointment->state=$request->state;
+      $appointment=Appointment::where('id',$request->appointment)->firstorfail();
+      $appointment->attend=1;
+      $appointment->diagnose=$request->diagnose;
       $appointment->save();
-      return back()->with('success','Change Appointment State');
+      return response('Appointment Diagnose Save');
     }
     public function show(Appointment $appointment)
     {

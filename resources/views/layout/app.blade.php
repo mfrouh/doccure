@@ -27,15 +27,16 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{asset('assets_admin/plugins/datatables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
-<body>
+<body >
     <div id="loader">
         <div class="loader">
             <span></span>
             <span></span>
         </div>
     </div>
-    <div class="main-wrapper">
+    <div class="main-wrapper" >
         <header class="header">
           <nav class="navbar navbar-expand-lg header-nav">
             <div class="navbar-header">
@@ -133,6 +134,7 @@
     @yield('content')
     @extends('layout.message')
 </body>
+<script src="{{ mix('js/app.js') }}" defer></script>
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <!-- Bootstrap Core JS -->
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
@@ -167,7 +169,7 @@
 
 <!-- Custom JS -->
 <script src="{{asset('assets/js/script.js')}}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6adZVdzTvBpE2yBRK8cDfsss8QXChK0I"></script>
-<script src="{{asset('assets/js/map.js')}}"></script>
+{{--  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6adZVdzTvBpE2yBRK8cDfsss8QXChK0I"></script>
+<script src="{{asset('assets/js/map.js')}}"></script>  --}}
 
 </html>

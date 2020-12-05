@@ -47,6 +47,12 @@
 										<i class="fas fa-calendar-check"></i>
 										<span>Surgeries</span>
 									</a>
+                                </li>
+                                <li>
+									<a href="/doctor/followups">
+										<i class="fas fa-calendar-check"></i>
+										<span>FollowUps</span>
+									</a>
 								</li>
 								<li>
 									<a href="/doctor/my-patients">
@@ -83,7 +89,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-7 col-lg-8 col-xl-9">
+			<div class="col-md-7 col-lg-8 col-xl-9" id="app">
                 @yield('dcontent')
 			</div>
 		</div>

@@ -3,7 +3,7 @@
 <div class="card card-table mb-0">
     <div class="card-body">
         <div class="table-responsive">
-            <surgeries :surgeries ="{{auth()->user()->doctor->clinic->surgeries}}"></surgeries>
+            <followups :followups ="{{$followups}}"></followups>
         </div>
     </div>
 </div>

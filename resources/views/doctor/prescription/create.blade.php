@@ -34,27 +34,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <form action="/doctor/prescriptioncontent" method="post">
+                            <form action="/doctor/prescriptioncontent"  method="post">
                                 @csrf
-                            <tr>
-                                <td>
-                                    <input class="form-control" type="text" name="name">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="text" name="quantity">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="text" name="days">
-                                </td>
-                                <td>
-                                    <input class="form-control" type="text" name="time">
-                                    <input type="hidden" name="prescription_id" value="{{$prescription->id}}">
-                                </td>
-                                <td>
-                                   <input type="submit" class="btn btn-primary" value="Save">
-                                </td>
-                            </tr>
-                           </form>
+                                 <tr>
+                                     <td>
+                                         <input class="form-control" type="text" name="name">
+                                     </td>
+                                     <td>
+                                         <input class="form-control" type="text" name="quantity">
+                                     </td>
+                                     <td>
+                                         <input class="form-control" type="text" name="days">
+                                     </td>
+                                     <td>
+                                         <input class="form-control" type="text" name="time">
+                                         <input type="hidden" name="prescription_id" value="{{$prescription->id}}">
+                                     </td>
+                                     <td>
+                                        <input type="submit" class="btn btn-primary" value="Save">
+                                     </td>
+                                 </tr>
+                            </form>
                            @foreach ($prescription->prescriptioncontent as $prescriptioncontent)
                             <tr>
                                 <td>{{$prescriptioncontent->name}}</td>
