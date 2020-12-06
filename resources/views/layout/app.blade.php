@@ -134,7 +134,7 @@
     @yield('content')
     @extends('layout.message')
 </body>
-<script src="{{ mix('js/app.js') }}" defer></script>
+<script src="{{ mix('js/app.js') }}"></script>
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <!-- Bootstrap Core JS -->
 <script src="{{asset('assets/js/popper.min.js')}}"></script>

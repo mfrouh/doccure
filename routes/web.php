@@ -108,7 +108,10 @@ Route::group(['prefix' => 'patient','middleware'=>['auth','Checkrole:patient']],
     Route::post('setting', 'Patient\SettingController@postsetting');
     //patient appointment
     Route::get('appointments', 'Patient\AppointmentController@index');
+    Route::post('booking', 'Patient\AppointmentController@store');
     Route::get('booking/{username}', 'Patient\AppointmentController@create');
+    Route::post('booking/day', 'Patient\AppointmentController@day');
+    Route::post('booking/time', 'Patient\AppointmentController@time');
     //patient prescription
     Route::get('prescriptions', 'Patient\MainController@prescriptions');
     Route::get('surgeries', 'Patient\MainController@surgeries');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Patient;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use App\Models\AppointmentTime;
+use App\Models\Clinic;
 use App\Models\Doctor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,79 +45,37 @@ class AppointmentController extends Controller
     {
         $this->validate($request,[
         'clinic_id'=>'required',
-        'patient_id'=>'required',
         'day'=>'required',
         'time'=>'required',
         ]);
+        $clinic=Clinic::find($request->clinic_id);
         $appointment =new Appointment();
         $appointment->clinic_id=$request->clinic_id;
-        $appointment->patient_id=$request->patient_id;
+        $appointment->patient_id=auth()->user()->patient->id;
         $appointment->day=$request->day;
         $appointment->time=$request->time;
+        $appointment->price=$clinic->price;
         $appointment->booking_day=now();
         $appointment->booking_time=now();
-        $appointment->follow_up=$request->follow_up;
         $appointment->state='pending';
         $appointment->save();
-
-
-
+        $appointmenttime=AppointmentTime::where('day',$request->day)->where('time',$request->time)->where('clinic_id',$request->clinic_id)->first();
+        $appointmenttime->booked=1;
+        $appointmenttime->save();
+        return response('booking success ');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Appointment $appointment)
+    public function time(Request $request)
     {
-        //
+        $times=AppointmentTime::where('clinic_id',$request->clinic)->where('day',$request->day)->get();
+        return response($times);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Appointment $appointment)
+    public function day(Request $request)
     {
-        return view('patient.appointment.edit',compact('appointment'));
+     $days=AppointmentTime::where('clinic_id',$request->clinic)->pluck('day');
+     return response($days->unique());
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Appointment $appointment)
-    {
-        $this->validate($request,[
-            'clinic_id'=>'required',
-            'patient_id'=>'required',
-            'day'=>'required',
-            'time'=>'required',
-            ]);
-            $appointment->clinic_id=$request->clinic_id;
-            $appointment->patient_id=$request->patient_id;
-            $appointment->day=$request->day;
-            $appointment->time=$request->time;
-            $appointment->booking_day=now();
-            $appointment->booking_time=now();
-            $appointment->follow_up=$request->follow_up;
-            $appointment->state='pending';
-            $appointment->save();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Appointment $appointment)
     {
         $appointment->delete();

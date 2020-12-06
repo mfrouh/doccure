@@ -38,6 +38,12 @@
 									</a>
                                 </li>
                                 <li>
+									<a href="/patient/appointments">
+										<i class="fas fa-calendar-check"></i>
+										<span>Appointment</span>
+									</a>
+                                </li>
+                                <li>
 									<a href="/patient/surgeries">
 										<i class="fas fa-bookmark"></i>
 										<span>Surgeries</span>
@@ -66,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-7 col-lg-8 col-xl-9">
+			<div class="col-md-7 col-lg-8 col-xl-9" id="app">
 				@yield('pcontent')
 			</div>
 		</div>

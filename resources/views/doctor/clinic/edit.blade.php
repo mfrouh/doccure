@@ -61,7 +61,12 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Appointment Time</label>
-                        <input type="text" class="form-control" name="time_appointment"  value="{{auth()->user()->doctor->clinic->time_appointment}}">
+                        <select class="form-control select"  name="time_appointment">
+                            <option value="15"{{auth()->user()->doctor->clinic->time_appointment=='15'?'selectd':''}}>15</option>
+                            <option value="30"{{auth()->user()->doctor->clinic->time_appointment=='30'?'selectd':''}}>30</option>
+                            <option value="45"{{auth()->user()->doctor->clinic->time_appointment=='45'?'selectd':''}}>45</option>
+                            <option value="60"{{auth()->user()->doctor->clinic->time_appointment=='60'?'selectd':''}}>60</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">

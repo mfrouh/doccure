@@ -47,7 +47,12 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Appointment Time</label>
-                        <input type="text" class="form-control" name="time_appointment"  >
+                        <select class="form-control select"  name="time_appointment">
+                            <option value="15" >15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="60">60</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">

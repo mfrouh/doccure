@@ -1,6 +1,9 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+import moment from 'moment';
+Vue.use(require('vue-moment'));
+
 
 // import { InertiaApp } from '@inertiajs/inertia-vue';
 // import { InertiaForm } from 'laravel-jetstream';
@@ -16,6 +19,7 @@ Vue.component('appointments',require('./Components/appointments.vue').default);
 Vue.component('surgeries',require('./Components/surgeries.vue').default);
 Vue.component('followups',require('./Components/followups.vue').default);
 Vue.component('prescriptions',require('./Components/prescriptions.vue').default);
+Vue.component('booking',require('./Components/booking.vue').default);
 
 // const app = document.getElementById('app');
 

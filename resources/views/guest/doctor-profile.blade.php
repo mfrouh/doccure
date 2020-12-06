@@ -3,7 +3,7 @@
     {{$doctor->user->name}}
 @endsection
 @section('content')
-			<div class="content">
+<div class="content">
 				<div class="container">
 					<div class="card">
 						<div class="card-body">
@@ -29,8 +29,8 @@
 											<ul class="clinic-gallery">
                                                  @foreach ($doctor->clinic->gallery as $image)
 												<li>
-													<a href="{{$image}}" data-fancybox="gallery">
-                                                      <img src="{{asset($image)}}" alt="Feature">
+													<a href="{{asset($image->url)}}" data-fancybox="gallery">
+                                                      <img src="{{asset($image->url)}}" alt="Feature">
 													</a>
                                                 </li>
                                                 @endforeach
@@ -57,7 +57,7 @@
 										</a>
 									</div>
 									<div class="clinic-booking">
-										<a class="apt-btn" href="booking">Book Appointment</a>
+										<a class="apt-btn" href="/patient/booking/{{$doctor->user->username}}">Book Appointment</a>
 									</div>
 								</div>
 							</div>
@@ -276,5 +276,5 @@
 					<!-- /Doctor Details Tab -->
 
 				</div>
-			</div>
+</div>
 @endsection
