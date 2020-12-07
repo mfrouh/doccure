@@ -14,13 +14,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(appointment, id) in appointments" :key="id">
+            <tr v-for="(appointment, id) in myappointments" :key="id">
               <td>
                 <h2 class="table-avatar float-left">
                   <a href="#" class="avatar avatar-sm mr-2"
-                    ><img class="avatar-img rounded-circle"
+                    ><img class="avatar-img rounded-circle" :scr="appointment.patientimg"
                   /></a>
-                  <a href="#">{{ appointment.patient }}</a>
+                  <a href="#">{{ appointment.patientname }}</a>
                 </h2>
               </td>
               <td>
@@ -38,10 +38,18 @@
                   <a class="btn btn-sm bg-info-light">
                     <i class="far fa-eye"></i> View
                   </a>
-                  <a @click="ChangeState('confirm')" class="btn btn-sm bg-success-light">
+                  <a
+                    v-if="appointment.state == 'pending'"
+                    @click="ChangeState('confirm', appointment.id)"
+                    class="btn btn-sm bg-success-light"
+                  >
                     <i class="fas fa-check"></i> Confirm
                   </a>
-                  <a @click="ChangeState('cancel')" class="btn btn-sm bg-danger-light">
+                  <a
+                    v-if="appointment.state == 'pending'"
+                    @click="ChangeState('cancel', appointment.id)"
+                    class="btn btn-sm bg-danger-light"
+                  >
                     <i class="fas fa-times"></i> Cancel
                   </a>
                 </div>
@@ -57,12 +65,34 @@
 export default {
   props: ["appointments"],
   data() {
-    return {};
+    return {
+      myappointments: [],
+    };
   },
   methods: {
-    ChangeState($state) {
-      alert($state);
+    ChangeState($state, $id) {
+      axios
+        .post("/doctor/appointment/changestate", {
+          id: $id,
+          state: $state,
+        })
+        .then((response) => {
+          this.GetAppointment();
+        })
+        .catch((error) => {});
     },
+    GetAppointment($state, $id) {
+      axios
+        .post("/doctor/appointments")
+        .then((response) => {
+          this.myappointments = response.data;
+        })
+        .catch((error) => {});
+    },
+  },
+  mounted() {
+    this.myappointments = this.appointments;
+    this.GetAppointment();
   },
 };
 </script>

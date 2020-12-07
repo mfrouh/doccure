@@ -18,13 +18,18 @@ class AppointmentController extends Controller
         $appointments=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->get();
         return view('doctor.main.appointments',compact('appointments'));
     }
+    public function getappointment()
+    {
+        $appointments=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->get();
+        return response($appointments);
+    }
 
     public function changestate(Request $request)
     {
       $appointment=Appointment::where('id',$request->id)->first();
       $appointment->state=$request->state;
       $appointment->save();
-      return back()->with('success','Change Appointment State');
+      return response('Change State '.$request->state);
     }
     public function diagnose(Request $request)
     {

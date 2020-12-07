@@ -1,4 +1,7 @@
 @extends('layout.doctor')
+@section('title')
+ Setting
+@endsection
 @section('dcontent')
 <div class="row">
     <div class="col-4">

@@ -15,8 +15,11 @@ class Appointment extends Model
         'day',
         'booking_day',
         'time',
-        'boojing_time',
+        'booking_time',
         'id'
+    ];
+    protected $appends=[
+        'patientimg','patientname'
     ];
     public function patient()
     {
@@ -39,5 +42,13 @@ class Appointment extends Model
         return $this->morphMany('App\Models\Surgery','surgeryable');
     }
 
+    public function getPatientimgAttribute()
+    {
+        return  asset($this->patient->user->image);
+    }
+    public function getPatientnameAttribute()
+    {
+        return $this->patient->user->name;
+    }
 
 }

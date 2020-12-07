@@ -1,4 +1,7 @@
 @extends('layout.doctor')
+@section('title')
+ Patients
+@endsection
 @section('dcontent')
 <div class="row row-grid">
     @foreach ($patients as $patient)

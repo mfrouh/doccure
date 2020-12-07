@@ -1,4 +1,7 @@
 @extends('layout.doctor')
+@section('title')
+ Dashboard
+@endsection
 @section('dcontent')
 <div class="row">
     <div class="col-md-12">
@@ -14,7 +17,7 @@
                             </div>
                             <div class="dash-widget-info">
                                 <h6>Total Patient</h6>
-                                <h3></h3>
+                                <h3>{{$patients->count()}}</h3>
                             </div>
                         </div>
                     </div>

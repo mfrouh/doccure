@@ -52,6 +52,7 @@ Route::group(['prefix' => 'doctor','middleware'=>['auth','Checkrole:doctor']], f
     Route::get('my-patients', 'Doctor\MainController@mypatients');
     //Doctor appointments
     Route::get('appointments', 'Doctor\AppointmentController@index');
+    Route::post('appointments', 'Doctor\AppointmentController@getappointment');
     Route::get('followups', 'Doctor\FollowUpController@index');
     Route::get('appointment/{appointment}', 'Doctor\AppointmentController@show');
     Route::post('appointment/changestate', 'Doctor\AppointmentController@changestate');

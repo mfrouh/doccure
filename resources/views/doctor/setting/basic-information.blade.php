@@ -1,4 +1,7 @@
 @extends('layout.doctor')
+@section('title')
+ Basic Information
+@endsection
 @section('dcontent')
 <div class="card">
     <div class="card-body">

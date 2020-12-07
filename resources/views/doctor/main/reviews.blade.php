@@ -1,4 +1,7 @@
 @extends('layout.doctor')
+@section('title')
+ Reviews
+@endsection
 @section('dcontent')
 <div class="doc-review review-listing">
 	<ul class="comments-list">

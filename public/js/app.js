@@ -2009,15 +2009,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["appointments"],
   data: function data() {
-    return {};
+    return {
+      myappointments: []
+    };
   },
   methods: {
-    ChangeState: function ChangeState($state) {
-      alert($state);
+    ChangeState: function ChangeState($state, $id) {
+      var _this = this;
+
+      axios.post("/doctor/appointment/changestate", {
+        id: $id,
+        state: $state
+      }).then(function (response) {
+        _this.GetAppointment();
+      })["catch"](function (error) {});
+    },
+    GetAppointment: function GetAppointment($state, $id) {
+      var _this2 = this;
+
+      axios.post("/doctor/appointments").then(function (response) {
+        _this2.myappointments = response.data;
+      })["catch"](function (error) {});
     }
+  },
+  mounted: function mounted() {
+    this.myappointments = this.appointments;
+    this.GetAppointment();
   }
 });
 
@@ -41811,14 +41839,26 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.appointments, function(appointment, id) {
+              _vm._l(_vm.myappointments, function(appointment, id) {
                 return _c("tr", { key: id }, [
                   _c("td", [
                     _c("h2", { staticClass: "table-avatar float-left" }, [
-                      _vm._m(1, true),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "avatar avatar-sm mr-2",
+                          attrs: { href: "#" }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "avatar-img rounded-circle",
+                            attrs: { scr: appointment.patientimg }
+                          })
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("a", { attrs: { href: "#" } }, [
-                        _vm._v(_vm._s(appointment.patient))
+                        _vm._v(_vm._s(appointment.patientname))
                       ])
                     ])
                   ]),
@@ -41847,39 +41887,49 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c("div", { staticClass: "table-action" }, [
-                      _vm._m(2, true),
+                      _vm._m(1, true),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-sm bg-success-light",
-                          on: {
-                            click: function($event) {
-                              return _vm.ChangeState("confirm")
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-check" }),
-                          _vm._v(" Confirm\n                ")
-                        ]
-                      ),
+                      appointment.state == "pending"
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-sm bg-success-light",
+                              on: {
+                                click: function($event) {
+                                  return _vm.ChangeState(
+                                    "confirm",
+                                    appointment.id
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-check" }),
+                              _vm._v(" Confirm\n                ")
+                            ]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-sm bg-danger-light",
-                          on: {
-                            click: function($event) {
-                              return _vm.ChangeState("cancel")
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-times" }),
-                          _vm._v(" Cancel\n                ")
-                        ]
-                      )
+                      appointment.state == "pending"
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-sm bg-danger-light",
+                              on: {
+                                click: function($event) {
+                                  return _vm.ChangeState(
+                                    "cancel",
+                                    appointment.id
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-times" }),
+                              _vm._v(" Cancel\n                ")
+                            ]
+                          )
+                        : _vm._e()
                     ])
                   ])
                 ])
@@ -41912,16 +41962,6 @@ var staticRenderFns = [
         _c("th")
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "avatar avatar-sm mr-2", attrs: { href: "#" } },
-      [_c("img", { staticClass: "avatar-img rounded-circle" })]
-    )
   },
   function() {
     var _vm = this

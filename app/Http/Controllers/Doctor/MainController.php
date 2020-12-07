@@ -12,13 +12,15 @@ class MainController extends Controller
 {
     public function dashboard()
     {
-       return view('doctor.main.dashboard');
+       $patientid=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->pluck('patient_id');
+       $patients=Patient::whereIn('id',$patientid)->get();
+       return view('doctor.main.dashboard',compact('patients'));
     }
 
     public function mypatients()
     {
        $patientid=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->pluck('patient_id');
-       $patients=Patient::whereIn('id',$patientid)->paginate(12);
+       $patients=Patient::whereIn('id',$patientid)->get();
        return view('doctor.main.my-patients',compact('patients'));
     }
 
