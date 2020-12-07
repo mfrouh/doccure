@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <booking :clinic="{{$doctor->clinic->id}}"></booking>
+        <booking :clinic="{{$doctor->clinic->id}}" doctor="{{$doctor->user->name}}"></booking>
     </div>
 </div>
 @endsection

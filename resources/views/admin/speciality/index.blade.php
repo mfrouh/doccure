@@ -10,7 +10,7 @@
 				<div class="card">
 					<div class="card-body">
 						<div class="table-responsive">
-							<table class="datatable table text-center table-hover table-center mb-0">
+							<table class="datatable table table-hover table-center mb-0">
 								<thead>
 									<tr>
 										<th>#</th>
@@ -24,10 +24,10 @@
 										<td>{{$k+1}}</td>
 										<td>
 											<h2 class="table-avatar">
-												<a href="profile" class="avatar avatar-sm mr-2">
-													<img class="avatar-img" src="{{$speciality->image}}" alt="Speciality">
+												<a href="#" class="avatar avatar-sm mr-2">
+													<img class=" avatar-img rounded-circle" src="{{asset($speciality->image)}}">
 												</a>
-												<a href="profile">{{$speciality->name}}</a>
+												<a href="#">{{$speciality->name}}</a>
 											</h2>
 										</td>
 										<td class="text-right">

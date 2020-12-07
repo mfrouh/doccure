@@ -26,6 +26,16 @@
                         <input type="text" class="form-control" name="name" value="{{auth()->user()->name}}">
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control select" name="gender">
+                            <option>Select</option>
+                            <option value="male" {{auth()->user()->gender=="male"?'selected':''}}>Male</option>
+                            <option value="female" {{auth()->user()->gender=="female"?'selected':''}}>Female</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label>Date of Birth</label>

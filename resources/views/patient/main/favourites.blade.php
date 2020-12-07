@@ -6,11 +6,9 @@
         <div class="profile-widget">
             <div class="doc-img">
                 <a href="doctor-profile">
-                    <img class="img-fluid" alt="User Image" src="{{asset($doctor->user->image)}}">
+                    <img class="img-fluid"  src="{{asset($doctor->user->image)}}">
                 </a>
-                <a href="/doctor-profile/{{asset($doctor->user->username)}}" class="fav-btn">
-                    <i class="far fa-bookmark"></i>
-                </a>
+                <favourite :clinic="{{$doctor->clinic->id}}"></favourite>
             </div>
             <div class="pro-content">
                 <h3 class="title">

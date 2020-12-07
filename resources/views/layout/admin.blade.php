@@ -129,7 +129,12 @@
 						</div>
 						<a class="dropdown-item" href="profile">My Profile</a>
 						<a class="dropdown-item" href="settings">Settings</a>
-						<a class="dropdown-item" href="login">Logout</a>
+                        <a class="dropdown-item"href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                         @csrf
+                       </form>
 					</div>
 				</li>
 			</ul>

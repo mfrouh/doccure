@@ -30,8 +30,8 @@ class AppointmentController extends Controller
      */
     public function create($username)
     {
-        $user=User::where('username',$username)->pluck('id');
-        $doctor=Doctor::where('user_id',$user)->firstorfail();
+        $user=User::where('username',$username)->firstorfail();
+        $doctor=Doctor::where('user_id',$user->id)->firstorfail();
         return view('patient.appointment.create',compact('doctor'));
     }
 

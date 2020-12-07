@@ -59,9 +59,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
     public function doctor()
     {
         return $this->hasOne('App\Models\Doctor');

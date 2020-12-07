@@ -3,7 +3,7 @@
     {{$doctor->user->name}}
 @endsection
 @section('content')
-<div class="content">
+<div class="content" id="app">
 				<div class="container">
 					<div class="card">
 						<div class="card-body">
@@ -52,9 +52,7 @@
 										</ul>
 									</div>
 									<div class="doctor-action">
-										<a href="javascript:void(0)" class="btn btn-white fav-btn">
-											<i class="far fa-bookmark"></i>
-										</a>
+                                        <favourite :clinic="{{$doctor->clinic->id}}"></favourite>
 									</div>
 									<div class="clinic-booking">
 										<a class="apt-btn" href="/patient/booking/{{$doctor->user->username}}">Book Appointment</a>
@@ -173,10 +171,10 @@
                                             <li>
                                                 <div class="comment">
                                                     <img class="avatar rounded-circle" alt="User Image" src="{{asset($review->patient->user->image)}}">
-                                                    <div class="comment-body">
+                                                    <div class="comment-body" style="width: 100%;">
                                                         <div class="meta-data">
                                                             <span class="comment-author">{{$review->patient->user->name}}</span>
-                                                            <span class="comment-date">{{$review->created_at->diffHumans()}}</span>
+                                                            <span class="comment-date">{{$review->created_at->diffforHumans()}}</span>
                                                             <div class="review-count rating">
                                                                 <i class="fas fa-star filled"></i>
                                                                 <i class="fas fa-star filled"></i>
@@ -186,7 +184,7 @@
                                                             </div>
                                                         </div>
                                                         <p class="comment-content">
-                                                           {{$review->content}}
+                                                           {{$review->review}}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -198,45 +196,8 @@
 
 									<!-- Write Review -->
 									<div class="write-review">
-										<h4>Write a review for <strong>{{$doctor->name}}</strong></h4>
-
-										<!-- Write Review Form -->
-										<form>
-											<div class="form-group">
-												<label>Review</label>
-												<div class="star-rating">
-													<input id="star-5" type="radio" name="rating" value="star-5">
-													<label for="star-5" title="5 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-4" type="radio" name="rating" value="star-4">
-													<label for="star-4" title="4 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-3" type="radio" name="rating" value="star-3">
-													<label for="star-3" title="3 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-2" type="radio" name="rating" value="star-2">
-													<label for="star-2" title="2 stars">
-														<i class="active fa fa-star"></i>
-													</label>
-													<input id="star-1" type="radio" name="rating" value="star-1">
-													<label for="star-1" title="1 star">
-														<i class="active fa fa-star"></i>
-													</label>
-												</div>
-											</div>
-											<div class="form-group">
-												<label>Your review</label>
-												<textarea id="review_desc" maxlength="100" class="form-control"></textarea>
-
-											  <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
-											</div>
-											<div class="submit-section">
-												<button type="submit" class="btn btn-primary submit-btn">Add Review</button>
-											</div>
-										</form>
+										<h4>Write a review for <strong>{{$doctor->user->name}}</strong></h4>
+                                        <review :clinic={{$doctor->clinic->id}}></review>
 									</div>
 									<!-- /Write Review -->
 

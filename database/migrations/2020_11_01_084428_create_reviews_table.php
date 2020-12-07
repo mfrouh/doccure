@@ -15,7 +15,8 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
+            $table->string('review')->nullable();
+            $table->enum('rate',[1,2,3,4,5])->nullable();
             $table->foreignId('clinic_id');
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('patient_id');

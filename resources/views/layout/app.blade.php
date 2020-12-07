@@ -73,7 +73,7 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="{{auth()->user()->image}}" alt="User Image" class="avatar-img rounded-circle">
+                                <img src="{{asset(auth()->user()->image)}}" alt="User Image" class="avatar-img rounded-circle">
                             </div>
                             <div class="user-text">
                                 <h6>{{auth()->user()->name}}</h6>

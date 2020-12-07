@@ -16,7 +16,7 @@ class MainController extends Controller
 
     public function doctorprofile($username)
     {
-       $doctor=User::where('username',$username)->first()->doctor;
+       $doctor=User::where('username',$username)->firstorfail()->doctor;
        return view('guest.doctor-profile',compact('doctor'));
     }
 

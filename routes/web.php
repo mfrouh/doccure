@@ -34,6 +34,9 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','Checkrole:admin']], fun
     Route::get('patients', 'Admin\MainController@patients');
     Route::get('dashboard', 'Admin\MainController@dashboard');
     Route::get('appointments', 'Admin\MainController@appointments');
+    Route::get('surgeries', 'Admin\MainController@surgeries');
+    Route::get('reviews', 'Admin\MainController@reviews');
+
 
 });
 
@@ -102,7 +105,7 @@ Route::group(['prefix' => 'patient','middleware'=>['auth','Checkrole:patient']],
     Route::post('change-password', 'Patient\SettingController@postchange');
     //favourites doctor
     Route::get('favourites', 'Patient\MainController@favourites');
-    Route::post('favourites', 'Patient\MainController@postfavourites');
+    Route::post('favourite', 'Patient\MainController@postfavourite');
     //setting information
     Route::get('setting', 'Patient\SettingController@setting');
     Route::post('setting', 'Patient\SettingController@postsetting');
@@ -115,7 +118,8 @@ Route::group(['prefix' => 'patient','middleware'=>['auth','Checkrole:patient']],
     //patient prescription
     Route::get('prescriptions', 'Patient\MainController@prescriptions');
     Route::get('surgeries', 'Patient\MainController@surgeries');
-
+    //review doctor
+    Route::post('/review', 'Patient\MainController@review');
 
 
 });

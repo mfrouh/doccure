@@ -14,9 +14,8 @@
 						<table class="datatable table table-hover table-center mb-0">
 							<thead>
 								<tr>
-									<th>Patient ID</th>
 									<th>Patient Name</th>
-									<th>Age</th>
+									<th>Date Of Birth</th>
 									<th>Address</th>
 									<th>Phone</th>
 									<th>City</th>
@@ -28,13 +27,13 @@
 								<tr>
 									<td>
 										<h2 class="table-avatar">
-											<a href="profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{asset($patient->user->image)}}" alt="User Image"></a>
-											<a href="profile">{{$patient->user->name}} </a>
+											<a href="#" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{asset($patient->user->image)}}" alt="User Image"></a>
+											<a href="#">{{$patient->user->name}} </a>
 										</h2>
 									</td>
-									<td>{{$patient->date_of_birth}}</td>
+									<td>{{$patient->user->date_of_birth}}</td>
 									<td>{{$patient->address}}</td>
-									<td>{{$patient->phone}}</td>
+									<td>{{$patient->user->phone_number}}</td>
 									<td>{{$patient->city}}</td>
                                 </tr>
                                 @endforeach

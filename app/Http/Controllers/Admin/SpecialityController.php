@@ -43,7 +43,9 @@ class SpecialityController extends Controller
         ]);
         $speciality=new Speciality();
         $speciality->name=$request->name;
-        $speciality->image=$request->image->store('');
+        if($request->image){
+        $speciality->image=sorteimage('storage/speciality',$request->image) ;
+        }
         $speciality->save();
         return back();
     }
@@ -84,7 +86,9 @@ class SpecialityController extends Controller
             'image'=>'required|image',
         ]);
         $speciality->name=$request->name;
-        $speciality->image=$request->image;
+        if($request->image){
+            $speciality->image=sorteimage('storage/speciality',$request->image) ;
+        }
         $speciality->save();
         return back();
     }

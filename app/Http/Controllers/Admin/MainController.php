@@ -6,13 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Patient;
+use App\Models\Review;
+use App\Models\Surgery;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
     public function dashboard()
     {
-       return view('admin.main.dashboard');
+        $doctors=Doctor::all();
+        $patients=Patient::all();
+        $surgeries=Surgery::all();
+        $appointments=Appointment::all();
+       return view('admin.main.dashboard',compact('doctors','patients','surgeries','appointments'));
     }
 
     public function doctors()
@@ -31,5 +37,15 @@ class MainController extends Controller
     {
         $appointments=Appointment::all();
         return view('admin.main.appointments',compact('appointments'));
+    }
+    public function reviews()
+    {
+        $reviews=Review::all();
+        return view('admin.main.reviews',compact('reviews'));
+    }
+    public function surgeries()
+    {
+        $surgeries=Surgery::all();
+        return view('admin.main.surgeries',compact('surgeries'));
     }
 }
