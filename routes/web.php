@@ -54,6 +54,7 @@ Route::group(['prefix' => 'doctor','middleware'=>['auth','Checkrole:doctor']], f
     Route::get('appointments', 'Doctor\AppointmentController@index');
     Route::post('appointments', 'Doctor\AppointmentController@getappointment');
     Route::get('followups', 'Doctor\FollowUpController@index');
+    Route::post('followups', 'Doctor\FollowUpController@getfollowups');
     Route::get('appointment/{appointment}', 'Doctor\AppointmentController@show');
     Route::post('appointment/changestate', 'Doctor\AppointmentController@changestate');
     Route::post('appointment/diagnose', 'Doctor\AppointmentController@diagnose');
@@ -90,11 +91,15 @@ Route::group(['prefix' => 'doctor','middleware'=>['auth','Checkrole:doctor']], f
     Route::post('/clinic/gallery', 'Doctor\ClinicController@gallery');
     //Doctor prescription
     Route::get('prescriptions', 'Doctor\PrescriptionController@index');
+    Route::post('prescriptions', 'Doctor\PrescriptionController@getprescriptions');
     Route::get('prescription/{id}', 'Doctor\PrescriptionController@show');
     //Doctor prescription_content
     Route::resource('prescriptioncontent', 'Doctor\PrescriptionContentController');
     //Doctor surgery
     Route::resource('surgery', 'Doctor\SurgeryController');
+    Route::post('surgeries', 'Doctor\SurgeryController@getsurgeries');
+    Route::get('/patient-profile/{username}', 'Doctor\MainController@patient');
+
 });
 
 //Patient Route

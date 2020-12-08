@@ -29,7 +29,16 @@ class FollowUpController extends Controller
         $followup->save();
         return back();
     }
-
+    public function getfollowups(Request $request)
+    {
+        $app=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id);
+        if ($request->patient) {
+         $app->where('patient_id',$request->patient);
+        }
+        $appointments=$app->get();
+        $followups=FollowUp::whereIn('appointment_id',$appointments)->get();
+        return response($followups);
+    }
     public function destroy(FollowUp $followUp)
     {
         $followUp->delete();

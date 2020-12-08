@@ -10,7 +10,7 @@
             <div class="card-body">
                 <div class="pro-widget-content">
                     <div class="profile-info-widget">
-                        <a href="patient-profile" class="booking-doc-img">
+                        <a href="/doctor/patient-profile/{{$patient->user->username}}" class="booking-doc-img">
                             <img src="{{asset($patient->user->image)}}">
                         </a>
                         <div class="profile-det-info">

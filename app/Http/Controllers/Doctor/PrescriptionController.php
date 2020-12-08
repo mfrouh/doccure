@@ -18,6 +18,15 @@ class PrescriptionController extends Controller
     {
         return view('doctor.prescription.index');
     }
+    public function getprescriptions(Request $request)
+    {
+        $app=Prescription::where('clinic_id',auth()->user()->doctor->clinic->id);
+        if ($request->patient) {
+         $app->where('patient_id',$request->patient);
+        }
+        $prescriptions=$app->get();
+        return response($prescriptions);
+    }
 
     /**
      * Show the form for creating a new resource.

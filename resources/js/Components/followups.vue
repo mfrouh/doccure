@@ -41,11 +41,34 @@
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
-  props: ["followups"],
+  props: ["followups", "patient"],
   data() {
-    return {};
+    return {
+      myfollowups: [],
+    };
   },
-  methods: {},
+  methods: {
+    GetFollowups() {
+      axios
+        .post("/doctor/followups", {
+          patient: this.patient,
+        })
+        .then((response) => {
+          this.myfollowups = response.data;
+        })
+        .catch((error) => {});
+    },
+  },
+  mounted() {
+    this.myfollowups = this.followups;
+    this.GetFollowups();
+  },
+  filters: {
+    Ftime: function (date) {
+      return moment("2020-12-12T" + date).format("HH:mm A");
+    },
+  },
 };
 </script>

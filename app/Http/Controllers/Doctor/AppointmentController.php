@@ -18,9 +18,13 @@ class AppointmentController extends Controller
         $appointments=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->get();
         return view('doctor.main.appointments',compact('appointments'));
     }
-    public function getappointment()
+    public function getappointment(Request $request)
     {
-        $appointments=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id)->get();
+        $app=Appointment::where('clinic_id',auth()->user()->doctor->clinic->id);
+        if ($request->patient) {
+         $app->where('patient_id',$request->patient);
+        }
+        $appointments=$app->get();
         return response($appointments);
     }
 

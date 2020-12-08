@@ -28,7 +28,6 @@ export default {
         })
         .then((response) => {
           this.diagnose = this.appointment.diagnose;
-          alert(response.data);
         })
         .catch((error) => {});
     },

@@ -22,6 +22,7 @@
     <!-- Datatables CSS -->
     <link rel="stylesheet" href="{{asset('assets_admin/plugins/datatables/datatables.min.css')}}">
     <!-- <link rel="stylesheet" href="assets/plugins/morris/morris.css"> -->
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{asset('assets_admin/css/style.css')}}">
 </head>
@@ -71,7 +72,7 @@
 									<a href="#">
 										<div class="media">
 											<span class="avatar avatar-sm">
-												<img class="avatar-img rounded-circle" src="{{asset('assets_admin/img/doctors/doctor-thumb-01.jpg')}}'">
+												<img class="avatar-img rounded-circle" src="{{asset('assets_admin/img/doctors/doctor-thumb-01.jpg')}}">
 											</span>
 											<div class="media-body">
 												<p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>

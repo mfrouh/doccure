@@ -1937,7 +1937,6 @@ __webpack_require__.r(__webpack_exports__);
         diagnose: this.diagnose
       }).then(function (response) {
         _this.diagnose = _this.appointment.diagnose;
-        alert(response.data);
       })["catch"](function (error) {});
     }
   }
@@ -1954,6 +1953,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2017,8 +2018,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["appointments"],
+  props: ["appointments", "patient"],
   data: function data() {
     return {
       myappointments: []
@@ -2035,10 +2042,12 @@ __webpack_require__.r(__webpack_exports__);
         _this.GetAppointment();
       })["catch"](function (error) {});
     },
-    GetAppointment: function GetAppointment($state, $id) {
+    GetAppointment: function GetAppointment() {
       var _this2 = this;
 
-      axios.post("/doctor/appointments").then(function (response) {
+      axios.post("/doctor/appointments", {
+        patient: this.patient
+      }).then(function (response) {
         _this2.myappointments = response.data;
       })["catch"](function (error) {});
     }
@@ -2046,6 +2055,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.myappointments = this.appointments;
     this.GetAppointment();
+  },
+  filters: {
+    Ftime: function Ftime(date) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()("2020-12-12T" + date).format("HH:mm A");
+    }
   }
 });
 
@@ -2306,6 +2320,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2348,12 +2364,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["followups"],
+  props: ["followups", "patient"],
   data: function data() {
-    return {};
+    return {
+      myfollowups: []
+    };
   },
-  methods: {}
+  methods: {
+    GetFollowups: function GetFollowups() {
+      var _this = this;
+
+      axios.post("/doctor/followups", {
+        patient: this.patient
+      }).then(function (response) {
+        _this.myfollowups = response.data;
+      })["catch"](function (error) {});
+    }
+  },
+  mounted: function mounted() {
+    this.myfollowups = this.followups;
+    this.GetFollowups();
+  },
+  filters: {
+    Ftime: function Ftime(date) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()("2020-12-12T" + date).format("HH:mm A");
+    }
+  }
 });
 
 /***/ }),
@@ -2367,6 +2405,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2407,12 +2447,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["prescriptions"],
+  props: ["prescriptions", "patient"],
   data: function data() {
-    return {};
+    return {
+      myprescriptions: []
+    };
   },
-  methods: {}
+  methods: {
+    Getprescriptions: function Getprescriptions() {
+      var _this = this;
+
+      axios.post("/doctor/prescriptions", {
+        patient: this.patient
+      }).then(function (response) {
+        _this.myprescriptions = response.data;
+      })["catch"](function (error) {});
+    }
+  },
+  mounted: function mounted() {
+    this.myprescriptions = this.prescriptions;
+    this.Getprescriptions();
+  },
+  filters: {
+    Ftime: function Ftime(date) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()("2020-12-12T" + date).format("HH:mm A");
+    }
+  }
 });
 
 /***/ }),
@@ -2492,6 +2554,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2534,12 +2598,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["surgeries"],
+  props: ["surgeries", "patient"],
   data: function data() {
-    return {};
+    return {
+      mysurgeries: []
+    };
   },
-  methods: {}
+  methods: {
+    Getsurgeries: function Getsurgeries() {
+      var _this = this;
+
+      axios.post("/doctor/surgeries", {
+        patient: this.patient
+      }).then(function (response) {
+        _this.mysurgeries = response.data;
+      })["catch"](function (error) {});
+    }
+  },
+  mounted: function mounted() {
+    this.mysurgeries = this.surgeries;
+    this.Getsurgeries();
+  },
+  filters: {
+    Ftime: function Ftime(date) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()("2020-12-12T" + date).format("HH:mm A");
+    }
+  }
 });
 
 /***/ }),
@@ -41866,7 +41952,7 @@ var render = function() {
                   _c("td", [
                     _vm._v("\n              " + _vm._s(appointment.day)),
                     _c("span", { staticClass: "d-block text-info" }, [
-                      _vm._v(_vm._s(appointment.time))
+                      _vm._v(_vm._s(_vm._f("Ftime")(appointment.time)))
                     ])
                   ]),
                   _vm._v(" "),
@@ -41875,7 +41961,7 @@ var render = function() {
                       "\n              " + _vm._s(appointment.booking_day)
                     ),
                     _c("span", { staticClass: "d-block text-info" }, [
-                      _vm._v(_vm._s(appointment.booking_time))
+                      _vm._v(_vm._s(_vm._f("Ftime")(appointment.booking_time)))
                     ])
                   ]),
                   _vm._v(" "),
@@ -41887,7 +41973,19 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c("div", { staticClass: "table-action" }, [
-                      _vm._m(1, true),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-sm bg-info-light",
+                          attrs: {
+                            href: "/doctor/appointment/" + appointment.id
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fe fe-eye" }),
+                          _vm._v(" View\n                ")
+                        ]
+                      ),
                       _vm._v(" "),
                       appointment.state == "pending"
                         ? _c(
@@ -41904,7 +42002,7 @@ var render = function() {
                               }
                             },
                             [
-                              _c("i", { staticClass: "fas fa-check" }),
+                              _c("i", { staticClass: "fe fe-check" }),
                               _vm._v(" Confirm\n                ")
                             ]
                           )
@@ -41925,7 +42023,7 @@ var render = function() {
                               }
                             },
                             [
-                              _c("i", { staticClass: "fas fa-times" }),
+                              _c("i", { staticClass: "fe fe-times" }),
                               _vm._v(" Cancel\n                ")
                             ]
                           )
@@ -41961,15 +42059,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "btn btn-sm bg-info-light" }, [
-      _c("i", { staticClass: "far fa-eye" }),
-      _vm._v(" View\n                ")
     ])
   }
 ]

@@ -27,6 +27,15 @@ class SurgeryController extends Controller
     {
         return view('doctor.surgery.create');
     }
+    public function getsurgeries(Request $request)
+    {
+        $app=Surgery::where('clinic_id',auth()->user()->doctor->clinic->id);
+        if ($request->patient) {
+         $app->where('patient_id',$request->patient);
+        }
+        $surgeries=$app->get();
+        return response($surgeries);
+    }
 
     /**
      * Store a newly created resource in storage.
