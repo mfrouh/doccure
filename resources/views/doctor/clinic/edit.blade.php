@@ -9,6 +9,7 @@
         <div class="row form-row">
             <div class="col-md-12">
                 <div class="form-group">
+                    <dropzone></dropzone>
                     <label>Clinic Images</label>
                     <form action="/doctor/clinic/gallery" class="dropzone">
                       @csrf
@@ -17,7 +18,7 @@
                 <div class="row upload-wrap">
                     @foreach (auth()->user()->doctor->clinic->gallery as $image)
                     <div class="col-2 upload-images">
-                        <img src="{{asset($image->url)}}" >
+                        <img data-dz-thumbnail class="dz-preview dz-processing dz-image-preview dz-success dz-complete" src="{{asset($image->url)}}" >
                         <a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
                     </div>
                     @endforeach
@@ -65,10 +66,10 @@
                     <div class="form-group">
                         <label class="control-label">Appointment Time</label>
                         <select class="form-control select"  name="time_appointment">
-                            <option value="15"{{auth()->user()->doctor->clinic->time_appointment=='15'?'selectd':''}}>15</option>
-                            <option value="30"{{auth()->user()->doctor->clinic->time_appointment=='30'?'selectd':''}}>30</option>
-                            <option value="45"{{auth()->user()->doctor->clinic->time_appointment=='45'?'selectd':''}}>45</option>
-                            <option value="60"{{auth()->user()->doctor->clinic->time_appointment=='60'?'selectd':''}}>60</option>
+                            <option value="15"{{auth()->user()->doctor->clinic->time_appointment=='15'?'selected':''}}>15</option>
+                            <option value="30"{{auth()->user()->doctor->clinic->time_appointment=='30'?'selected':''}}>30</option>
+                            <option value="45"{{auth()->user()->doctor->clinic->time_appointment=='45'?'selected':''}}>45</option>
+                            <option value="60"{{auth()->user()->doctor->clinic->time_appointment=='60'?'selected':''}}>60</option>
                         </select>
                     </div>
                 </div>
@@ -92,7 +93,7 @@
                     <div class="form-group">
                         <label>Days Work</label>
                         <select class="form-control select"  name="type_booking">
-                            <option value="7" {{auth()->user()->doctor->clinic->type_booking=='7'?'selected':''}}>7</option>
+                            <option value="7"  {{auth()->user()->doctor->clinic->type_booking=='7'?'selected':''}}>7</option>
                             <option value="14" {{auth()->user()->doctor->clinic->type_booking=='14'?'selected':''}}>14</option>
                             <option value="30" {{auth()->user()->doctor->clinic->type_booking=='30'?'selected':''}}>30</option>
                         </select>

@@ -22,6 +22,7 @@ Vue.component('prescriptions',require('./Components/prescriptions.vue').default)
 Vue.component('booking',require('./Components/booking.vue').default);
 Vue.component('review',require('./Components/review.vue').default);
 Vue.component('favourite',require('./Components/favourite.vue').default);
+Vue.component('dropzone',require('./Components/dropzone.vue').default);
 
 
 // const app = document.getElementById('app');

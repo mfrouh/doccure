@@ -20,6 +20,8 @@
     <!-- Full Calander CSS -->
     <link rel="stylesheet" href="{{asset('assets_admin/plugins/fullcalendar/fullcalendar.min.css')}}">
     <!-- Datatables CSS -->
+    <link rel="stylesheet" href="{{asset('assets/plugins/dropzone/dropzone.min.css')}}">
+
     <link rel="stylesheet" href="{{asset('assets_admin/plugins/datatables/datatables.min.css')}}">
     <!-- <link rel="stylesheet" href="assets/plugins/morris/morris.css"> -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
@@ -30,10 +32,10 @@
     <div class="main-wrapper">
 		<div class="header">
 			<div class="header-left">
-				<a href="index_admin" class="logo">
+				<a href="/" class="logo">
 					<img src="{{asset('assets_admin/img/logo.png')}}" alt="Logo">
 				</a>
-				<a href="index_admin" class="logo logo-small">
+				<a href="/" class="logo logo-small">
 					<img src="{{asset('assets_admin/img/logo-small.png')}}" alt="Logo" width="30" height="30">
 				</a>
 			</div>
@@ -46,7 +48,7 @@
 			<ul class="nav user-menu">
 				<li class="nav-item dropdown noti-dropdown">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-						<i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+						<i class="fe fe-bell"></i> <span class="badge badge-pill">{{auth()->user()->unreadnotifications->count()}}</span>
 					</a>
 					<div class="dropdown-menu notifications">
 						<div class="topnav-dropdown-header">
@@ -55,58 +57,21 @@
 						</div>
 						<div class="noti-content">
 							<ul class="notification-list">
+                                @foreach (auth()->user()->notifications as $notification)
 								<li class="notification-message">
-									<a href="#">
+									<a href="/doctor/appointment/{{$notification->data['appointment_id']}}">
 										<div class="media">
 											<span class="avatar avatar-sm">
-												<img class="avatar-img rounded-circle" src="{{asset('assets_admin/img/doctors/doctor-thumb-01.jpg')}}">
+												<img class="avatar-img rounded-circle" src="{{asset($notification->data['patient_image'])}}">
 											</span>
 											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Dr. Ruby Perrin</span> Schedule <span class="noti-title">her appointment</span></p>
-												<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+												<p class="noti-details">{{$notification->data['content']}}</p>
+												<p class="noti-time"><span class="notification-time">{{$notification->created_at->diffforhumans()}}</span></p>
 											</div>
 										</div>
 									</a>
-								</li>
-								<li class="notification-message">
-									<a href="#">
-										<div class="media">
-											<span class="avatar avatar-sm">
-												<img class="avatar-img rounded-circle" src="{{asset('assets_admin/img/doctors/doctor-thumb-01.jpg')}}">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Charlene Reed</span> has booked her appointment to <span class="noti-title">Dr. Ruby Perrin</span></p>
-												<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="notification-message">
-									<a href="#">
-										<div class="media">
-											<span class="avatar avatar-sm">
-												<img class="avatar-img rounded-circle" alt="User Image" src="{{asset('assets_admin/img/patients/patient2.jpg')}}">
-											</span>
-											<div class="media-body">
-											<p class="noti-details"><span class="noti-title">Travis Trimble</span> sent a amount of $210 for his <span class="noti-title">appointment</span></p>
-											<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-										</div>
-									</a>
-								</li>
-								<li class="notification-message">
-									<a href="#">
-										<div class="media">
-											<span class="avatar avatar-sm">
-												<img class="avatar-img rounded-circle" alt="User Image" src="{{asset('assets_admin/img/patients/patient3.jpg')}}">
-											</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Carl Kelly</span> send a message <span class="noti-title"> to his doctor</span></p>
-												<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-											</div>
-										</div>
-									</a>
-								</li>
+                                </li>
+                                @endforeach
 							</ul>
 						</div>
 						<div class="topnav-dropdown-footer">
@@ -230,8 +195,10 @@
 <script src="{{asset('assets_admin/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 {{-- @if(Route::is(['page'])) --}}
 <script src="{{asset('assets_admin/plugins/raphael/raphael.min.js')}}"></script>
-<script src="{{asset('assets_admin/plugins/morris/morris.min.js"')}}'></script>
-<script src="{{asset('assets_admin/js/chart.morris.js')}}"></script>
+{{--  <script src="{{asset('assets_admin/plugins/morris/morris.min.js"')}}"></script>  --}}
+{{--  <script src="{{asset('assets_admin/js/chart.morris.js')}}"></script>  --}}
+<script src="{{asset('assets/plugins/dropzone/dropzone.min.js')}}"></script>
+
 {{-- @endif --}}
 <!-- Form Validation JS -->
 <script src="{{asset('assets_admin/js/form-validation.js')}}"></script>

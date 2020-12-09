@@ -9,7 +9,7 @@ Patient - {{$patient->user->name}}
     <div class="profile-sidebar">
         <div class="widget-profile pro-widget-content">
             <div class="profile-info-widget">
-                <a href="#" class="booking-doc-img">
+                <a href="/doctor/patient-profile/{{$patient->user->username}}" class="booking-doc-img">
                     <img src="{{asset($patient->user->image)}}" alt="User Image">
                 </a>
                 <div class="profile-det-info">

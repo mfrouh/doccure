@@ -110,9 +110,9 @@
 															</div>
 															<div class="experience-content">
 																<div class="timeline-content">
-																	<a href="#/" class="name">American Dental Medical University</a>
-																	<div>BDS</div>
-																	<span class="time">1998 - 2003</span>
+																	<a href="#/" class="name">{{$education->college}}</a>
+																	<div>{{$education->degree}}</div>
+																	<span class="time">{{$education->from}} - {{$education->to}}</span>
 																</div>
 															</div>
                                                         </li>
@@ -134,8 +134,8 @@
 															</div>
 															<div class="experience-content">
 																<div class="timeline-content">
-																	<a href="#/" class="name">Glowing Smiles Family Dental Clinic</a>
-																	<span class="time">2010 - Present (5 years)</span>
+																	<a href="#/" class="name">{{$experience->hospital_name}}</a>
+																	<span class="time">{{$experience->from}} -{{ $experience->to}}</span>
 																</div>
 															</div>
                                                         </li>
@@ -194,11 +194,14 @@
 									</div>
 									<!-- /Review Listing -->
 
-									<!-- Write Review -->
+                                    <!-- Write Review -->
+                                    @auth
 									<div class="write-review">
 										<h4>Write a review for <strong>{{$doctor->user->name}}</strong></h4>
                                         <review :clinic={{$doctor->clinic->id}}></review>
-									</div>
+                                    </div>
+                                    @endauth
+
 									<!-- /Write Review -->
 
 								</div>

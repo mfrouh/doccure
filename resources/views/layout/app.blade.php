@@ -28,6 +28,136 @@
     <link rel="stylesheet" href="{{asset('assets_admin/plugins/datatables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <style>
+.notifications {
+	padding: 0;
+}
+.notifications .notification-time {
+	font-size: 12px;
+	line-height: 1.35;
+	color: #bdbdbd;
+}
+.notifications .media {
+	margin-top: 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+.notifications .media:last-child {
+	border-bottom: none;
+}
+.notifications .media a {
+	display: block;
+	padding: 10px 15px;
+	border-radius: 2px;
+}
+.notifications .media a:hover {
+	background-color: #fafafa;
+}
+.notifications .media > .avatar {
+	margin-right: 10px;
+}
+.notifications .media-list .media-left {
+	padding-right: 8px;
+}
+.topnav-dropdown-header {
+	border-bottom: 1px solid #eee;
+	text-align: center;
+}
+.topnav-dropdown-header,
+.topnav-dropdown-footer {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.topnav-dropdown-footer {
+	border-top: 1px solid #eee;
+}
+.topnav-dropdown-footer a {
+	display: block;
+	text-align: center;
+	color: #333;
+}
+.user-menu.nav > li > a .badge {
+	background-color: #1b5a90;
+    display: block;
+    font-size: 10px;
+    font-weight: bold;
+    min-height: 15px;
+    min-width: 15px;
+    position: absolute;
+    right: 3px;
+    color: #fff;
+    top: 6px;
+}
+.user-menu.nav > li > a > i {
+	font-size: 1.5rem;
+	line-height: 60px;
+}
+.noti-details {
+	color: #000000;
+    margin-bottom: 0;
+    font-size: small;
+}
+.noti-title {
+	color: #333;
+}
+.notifications .noti-content {
+	height: 290px;
+	width: 350px;
+	overflow-y: auto;
+	position: relative;
+}
+.notification-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.notifications ul.notification-list > li{
+	margin-top: 0;
+	border-bottom: 1px solid #f5f5f5;
+}
+.notifications ul.notification-list > li:last-child {
+	border-bottom: none;
+}
+.notifications ul.notification-list > li a {
+	display: block;
+	padding: 10px 15px;
+	border-radius: 2px;
+}
+.notifications ul.notification-list > li a:hover {
+	background-color: #fafafa;
+}
+.notifications ul.notification-list > li .list-item {
+    border: 0;
+    padding: 0;
+    position: relative;
+}
+.topnav-dropdown-header .notification-title {
+    color: #333;
+    display: block;
+    float: left;
+    font-size: 14px;
+}
+.topnav-dropdown-header .clear-noti {
+    color: #f83f37;
+    float: right;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+.noti-time {
+    margin: 0;
+}
+.dropdown-menu
+{
+    right:0;
+    left: auto;
+}
+.user-menu.nav > li > a {
+    color: black;
+}
+    </style>
+
 </head>
 <body >
     <div id="loader">
@@ -61,9 +191,42 @@
                     </a>
                 </div>
             </div>
-            <ul class="nav header-navbar-rht">
+            <ul class="nav header-navbar-rht nav user-menu">
                 @auth
                 @if (auth()->user()->role=='patient')
+                <li class="nav-item dropdown noti-dropdown">
+					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+						<i class="fas fa-bell"></i> <span class="badge badge-pill">{{auth()->user()->unreadnotifications->count()}}</span>
+					</a>
+					<div class="dropdown-menu notifications">
+						<div class="topnav-dropdown-header">
+							<span class="notification-title">Notifications</span>
+							<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+						</div>
+						<div class="noti-content">
+							<ul class="notification-list">
+                                @foreach (auth()->user()->notifications as $notification)
+								<li class="notification-message">
+									<a href="/doctor-profile/{{$notification->data['doctor_username']}}">
+										<div class="media">
+											<span class="avatar avatar-sm">
+												<img class="avatar-img rounded-circle" src="{{asset($notification->data['doctor_image'])}}">
+											</span>
+											<div class="media-body">
+												<p class="noti-details">{{$notification->data['content']}}</p>
+												<p class="noti-time"><span class="notification-time">{{$notification->created_at->diffforhumans()}}</span></p>
+											</div>
+										</div>
+									</a>
+                                </li>
+                                @endforeach
+							</ul>
+						</div>
+						<div class="topnav-dropdown-footer">
+							<a href="#">View all Notifications</a>
+						</div>
+					</div>
+				</li>
                 <li class="nav-item dropdown has-arrow logged-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img">
@@ -91,42 +254,12 @@
                     </div>
                 </li>
                 @endif
-                @if (auth()->user()->role=='doctor')
-                <li class="nav-item dropdown has-arrow logged-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="user-img">
-                            <img class="rounded-circle" src="{{asset(auth()->user()->image)}}" width="31" alt="Darren Elder">
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="user-header">
-                            <div class="avatar avatar-sm">
-                                <img src="{{asset(auth()->user()->image)}}" alt="User Image" class="avatar-img rounded-circle">
-                            </div>
-                            <div class="user-text">
-                                <h6>{{auth()->user()->name}}</h6>
-                                <p class="text-muted mb-0">Doctor</p>
-                            </div>
-                        </div>
-                        <a class="dropdown-item" href="/doctor/dashboard">Dashboard</a>
-                        <a class="dropdown-item" href="/doctor/setting">Profile Settings</a>
-                        <a class="dropdown-item"href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">Logout</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                         @csrf
-                       </form>
-                    </div>
-                </li>
-                @endif
                 @endauth
+                @guest
                 <li class="nav-item contact-item">
-                    @guest
-                    <li class="nav-item">
                       <a class="nav-link header-login" href="login">login / Signup </a>
-                    </li>
-                    @endguest
                 </li>
+                @endguest
             </ul>
           </nav>
         </header>

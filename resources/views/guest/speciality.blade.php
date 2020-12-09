@@ -1,14 +1,13 @@
 @extends('layout.app')
 @section('title')
-    Search
+    Speciality
 @endsection
 @section('content')
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-                    <form action="" method="get">
-					  <div class="card search-filter">
+					<div class="card search-filter">
 						<div class="card-header">
 							<h4 class="card-title mb-0">Search Filter</h4>
 						</div>
@@ -21,34 +20,22 @@
 							<h4>Gender</h4>
 							<div>
 								<label class="custom_check">
-									<input type="checkbox" name="gender[]" value="male">
+									<input type="checkbox" name="gender" >
 									<span class="checkmark"></span> Male Doctor
 								</label>
 							</div>
 							<div>
 								<label class="custom_check">
-									<input type="checkbox" name="gender[]" value="female">
+									<input type="checkbox" name="gender">
 									<span class="checkmark"></span> Female Doctor
 								</label>
 							</div>
 						</div>
-						<div class="filter-widget">
-                            <h4>Select Specialist</h4>
-                            @foreach ($specialities as $speciality)
-							<div>
-								<label class="custom_check">
-									<input type="checkbox" name="specialist[]"  value="{{$speciality->name}}">
-									<span class="checkmark"></span> {{$speciality->name}}
-								</label>
-                            </div>
-                            @endforeach
-						</div>
 							<div class="btn-search">
-								<input type="submit" class="btn btn-block" value="Search">
+								<button type="button" class="btn btn-block">Search</button>
 							</div>
 						</div>
-                      </div>
-                   </form>
+					</div>
 				</div>
 				<div class="col-md-12 col-lg-8 col-xl-9">
                       @foreach ($clinics as $clinic)
@@ -76,7 +63,7 @@
 										<div class="clinic-details">
 											<p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{$clinic->city}}, {{$clinic->country}}</p>
 											<ul class="clinic-gallery">
-                                                @foreach ($clinic->gallery->take(5) as $image)
+                                                @foreach ($clinic->gallery as $image)
 												<li>
 													<a href="{{asset($image->url)}}" data-fancybox="gallery">
 														<img src="{{asset($image->url)}}" alt="Feature">

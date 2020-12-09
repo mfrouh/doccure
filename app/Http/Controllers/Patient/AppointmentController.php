@@ -7,7 +7,10 @@ use App\Models\Appointment;
 use App\Models\AppointmentTime;
 use App\Models\Clinic;
 use App\Models\Doctor;
+use App\Models\Prescription;
+use App\Models\Surgery;
 use App\Models\User;
+use App\Notifications\booking;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -62,7 +65,19 @@ class AppointmentController extends Controller
         $appointmenttime=AppointmentTime::where('day',$request->day)->where('time',$request->time)->where('clinic_id',$request->clinic_id)->first();
         $appointmenttime->booked=1;
         $appointmenttime->save();
+        $user=User::find(auth()->user()->id);
+        $clinic->doctor->user->notify(new booking($appointment));
         return response('booking success ');
+    }
+    public function show(Appointment $appointment)
+    {
+       if ($appointment->patient_id==auth()->user()->patient->id)
+       {
+        $surgeries=Surgery::where('patient_id',auth()->user()->patient->id)->where('clinic_id',$appointment->clinic->id)->get();
+        $prescriptions=Prescription::where('patient_id',auth()->user()->patient->id)->where('clinic_id',$appointment->clinic->id)->get();
+        return view('patient.appointment.show',compact('appointment','surgeries','prescriptions'));
+       }
+        return abort('404');
     }
 
     public function time(Request $request)

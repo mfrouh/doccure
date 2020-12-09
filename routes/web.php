@@ -22,8 +22,9 @@ Route::get('/doctor-register', function () {
 });
 Route::get('/', 'Guest\MainController@index');
 Route::get('/doctor-profile/{username}', 'Guest\MainController@doctorprofile');
-Route::get('/patient-profile', 'Guest\MainController@patientprofile');
+Route::get('/speciality/{name}', 'Guest\MainController@speciality');
 Route::get('/search', 'Guest\MainController@search');
+Route::get('/clinics', 'Guest\MainController@search');
 
 
 ///admin route
@@ -117,6 +118,7 @@ Route::group(['prefix' => 'patient','middleware'=>['auth','Checkrole:patient']],
     Route::post('setting', 'Patient\SettingController@postsetting');
     //patient appointment
     Route::get('appointments', 'Patient\AppointmentController@index');
+    Route::get('appointment/{appointment}', 'Patient\AppointmentController@show');
     Route::post('booking', 'Patient\AppointmentController@store');
     Route::get('booking/{username}', 'Patient\AppointmentController@create');
     Route::post('booking/day', 'Patient\AppointmentController@day');

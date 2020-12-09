@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\AppointmentTime as JobsAppointmentTime;
 use App\Models\AppointmentTime;
 use App\Models\Clinic;
 use Carbon\Carbon;
@@ -53,7 +54,7 @@ class ClinicController extends Controller
         $clinic->days_work=json_encode($request->days_work);
         $clinic->type_booking=$request->type_booking;
         $clinic->save();
-        $this->AppointmentT($clinic);
+        $this->dispatch(new JobsAppointmentTime($clinic));
         return back()->with('success','Clinic Created');
     }
 
@@ -84,30 +85,15 @@ class ClinicController extends Controller
             $clinic->days_work=json_encode($request->days_work);
             $clinic->type_booking=$request->type_booking;
             $clinic->save();
+            $appointment_time=AppointmentTime::where('clinic_id',$clinic->id)->where('booked',0)->delete();
+            $this->dispatch(new JobsAppointmentTime($clinic));
             return back()->with('success','Clinic Updated');
     }
-    public static function AppointmentT($clinic)
-    {
-      for ($i=0; $i < $clinic->type_booking; $i++) {
-        $open=Carbon::parse($clinic->open)->format('h:i:s');
-        $close=Carbon::parse($clinic->close)->format('h:i:s');
-        $j=0;
-            do {
-                $day=Carbon::now()->addDays($i);
-                $open=Carbon::parse($clinic->open)->addMinutes($j*$clinic->time_appointment)->format('h:i:s');
-                $close=Carbon::parse($clinic->close)->format('h:i:s');
-                $appointment_time=new AppointmentTime();
-                $appointment_time->clinic_id=$clinic->id;
-                $appointment_time->day=$day;
-                $appointment_time->time=$open;
-                $appointment_time->save();
-                $j++;
-            } while ($close > $open);
-      }
-    }
+
     public function gallery(Request $request)
     {
           auth()->user()->doctor->clinic->gallery()->create(['url'=>sorteimage('storage/clinic',$request->file)]);
+          return response('Uploaded');
     }
     public function delete(Request $request)
     {

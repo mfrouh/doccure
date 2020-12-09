@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use App\Models\AppointmentTime;
+use App\Models\Prescription;
+use App\Models\Surgery;
+use App\Notifications\bookingstate;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -33,6 +37,19 @@ class AppointmentController extends Controller
       $appointment=Appointment::where('id',$request->id)->first();
       $appointment->state=$request->state;
       $appointment->save();
+      if($request->state=='cancel')
+      {
+        $appointmenttime=AppointmentTime::where('day',$appointment->day)->where('time',$appointment->time)->where('clinic_id',$appointment->clinic_id)->first();
+        if ($appointmenttime) {
+            $appointmenttime->booked=0;
+            $appointmenttime->save();
+        }
+        $appointment->patient->user->notify(new bookingstate($appointment));
+        $appointment->delete();
+      }else
+      {
+        $appointment->patient->user->notify(new bookingstate($appointment));
+      }
       return response('Change State '.$request->state);
     }
     public function diagnose(Request $request)
@@ -47,7 +64,9 @@ class AppointmentController extends Controller
     {
        if ($appointment->clinic_id==auth()->user()->doctor->clinic->id)
        {
-        return view('doctor.main.appointment',compact('appointment'));
+        $surgeries=Surgery::where('clinic_id',auth()->user()->doctor->clinic->id)->where('patient_id',$appointment->patient->id)->get();
+        $prescriptions=Prescription::where('clinic_id',auth()->user()->doctor->clinic->id)->where('patient_id',$appointment->patient->id)->get();
+        return view('doctor.main.appointment',compact('appointment','surgeries','prescriptions'));
        }
         return abort('404');
     }

@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="booking-doc-info">
-                    <a href="doctor-profile" class="booking-doc-img">
+                    <a href="/doctor-profile/{{$doctor->user->username}}" class="booking-doc-img">
                         <img src="{{asset($doctor->user->image)}}" alt="User Image">
                     </a>
                     <div class="booking-info">

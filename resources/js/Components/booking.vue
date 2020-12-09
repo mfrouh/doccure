@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="days[0]">
     <div class="card booking-schedule schedule-widget" v-if="step != 3">
       <div class="schedule-header">
         <div class="row">
