@@ -232,7 +232,7 @@
                 <li class="nav-item dropdown has-arrow logged-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img">
-                            <img class="rounded-circle" src="{{asset(auth()->user()->image)}}" width="31" alt="Ryan Taylor">
+                            <img class="rounded-circle" src="{{asset(auth()->user()->image)}}" width="31">
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -257,11 +257,14 @@
                 </li>
                 @endif
                 @endauth
-                @guest
                 <li class="nav-item contact-item">
-                      <a class="nav-link header-login" href="login">login / Signup </a>
+                    @guest
+                    <li>
+                      <a class="nav-link header-login" href="/login">login / Signup </a>
+                    </li>
+                    @endguest
+
                 </li>
-                @endguest
             </ul>
           </nav>
         </header>
