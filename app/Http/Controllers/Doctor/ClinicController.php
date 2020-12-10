@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\AppointmentTime as JobsAppointmentTime;
 use App\Models\AppointmentTime;
 use App\Models\Clinic;
+use App\Models\Image;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -97,7 +98,13 @@ class ClinicController extends Controller
     }
     public function delete(Request $request)
     {
-          auth()->user()->doctor->clinic->gallery()->delete();
+          $image=Image::findorfail($request->id);
+          $image->delete();
+          return response('Deleted');
+    }
+    public function all()
+    {
+          return response(auth()->user()->doctor->clinic->gallery);
     }
 
 }

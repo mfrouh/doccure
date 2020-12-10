@@ -2299,24 +2299,77 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "app",
   components: {
     vueDropzone: vue2_dropzone__WEBPACK_IMPORTED_MODULE_0___default.a
   },
+  mounted: function mounted() {
+    this.getgallery();
+  },
   data: function data() {
     return {
+      gallery: [],
       dropzoneOptions: {
-        url: "https://httpbin.org/post",
+        url: "/doctor/clinic/gallery",
         thumbnailWidth: 150,
         maxFilesize: 0.5,
         headers: {
-          "My-Awesome-Header": "header value"
+          "X-CSRF-TOKEN": document.head.querySelector("[name=csrf-token]").content
         }
       }
     };
+  },
+  methods: {
+    uploadSuccess: function uploadSuccess(file, response) {
+      this.getgallery();
+    },
+    deleteimage: function deleteimage($id) {
+      var _this = this;
+
+      axios.post("/doctor/clinic/gallery/delete", {
+        id: $id
+      }).then(function (response) {
+        _this.getgallery();
+      })["catch"](function (error) {});
+    },
+    getgallery: function getgallery() {
+      var _this2 = this;
+
+      axios.get("/doctor/clinic/gallery/all").then(function (response) {
+        _this2.gallery = response.data;
+      })["catch"](function (error) {});
+    }
   }
 });
 
@@ -42937,21 +42990,73 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", [_vm._v("Clinic Images")]),
+        _vm._v(" "),
+        _c("vue-dropzone", {
+          ref: "myVueDropzone",
+          attrs: { id: "dropzone", options: _vm.dropzoneOptions },
+          on: { "vdropzone-success": _vm.uploadSuccess }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("label", [_vm._v("Gallery")]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row upload-wrap dropzone" },
+      _vm._l(_vm.gallery, function(image, index) {
+        return _c(
+          "div",
+          {
+            key: index,
+            staticClass:
+              "dz-preview dz-processing dz-image-preview dz-success dz-complete"
+          },
+          [
+            _c("div", { attrs: { calss: "dz-image" } }, [
+              _c("img", {
+                staticStyle: {
+                  width: "120px",
+                  height: "120px",
+                  "border-radius": "20px"
+                },
+                attrs: { src: "/" + image.url }
+              }),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-icon btn-danger btn-sm",
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteimage(image.id)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-trash",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ])
+          ]
+        )
+      }),
+      0
+    )
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", {
-        staticClass: "dropzone",
-        attrs: { action: "/doctor/clinic/gallery" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

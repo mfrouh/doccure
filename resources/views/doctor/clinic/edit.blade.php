@@ -8,23 +8,7 @@
         <h4 class="card-title">Clinic Info</h4>
         <div class="row form-row">
             <div class="col-md-12">
-                <div class="form-group">
-                    <dropzone></dropzone>
-                    <label>Clinic Images</label>
-                    <form action="/doctor/clinic/gallery" class="dropzone">
-                      @csrf
-                    </form>
-                </div>
-                <div class="row upload-wrap">
-                    @foreach (auth()->user()->doctor->clinic->gallery as $image)
-                    <div class="col-2 upload-images">
-                        <img data-dz-thumbnail class="dz-preview dz-processing dz-image-preview dz-success dz-complete" src="{{asset($image->url)}}" >
-                        <a href="javascript:void(0);" class="btn btn-icon btn-danger btn-sm"><i class="far fa-trash-alt"></i></a>
-                    </div>
-                    @endforeach
-                </div>
-                <form action="/doctor/clinic" method="post">
-                    @csrf
+                <dropzone></dropzone>
                 <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

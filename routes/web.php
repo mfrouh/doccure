@@ -90,6 +90,8 @@ Route::group(['prefix' => 'doctor','middleware'=>['auth','Checkrole:doctor']], f
     Route::post('/clinic', 'Doctor\ClinicController@update');
     Route::post('/clinic/create', 'Doctor\ClinicController@store');
     Route::post('/clinic/gallery', 'Doctor\ClinicController@gallery');
+    Route::post('/clinic/gallery/delete', 'Doctor\ClinicController@delete');
+    Route::get('/clinic/gallery/all', 'Doctor\ClinicController@all');
     //Doctor prescription
     Route::get('prescriptions', 'Doctor\PrescriptionController@index');
     Route::post('prescriptions', 'Doctor\PrescriptionController@getprescriptions');
