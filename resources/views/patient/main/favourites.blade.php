@@ -12,7 +12,7 @@
             </div>
             <div class="pro-content">
                 <h3 class="title">
-                    <a href="doctor-profile">{{$doctor->user->name}}</a>
+                    <a href="/doctor-profile/{{$doctor->user->username}}">{{$doctor->user->name}}</a>
                     <i class="fas fa-check-circle verified"></i>
                 </h3>
                 <p class="speciality">{{$doctor->speciality->name}}</p>
@@ -37,10 +37,10 @@
                 </ul>
                 <div class="row row-sm">
                     <div class="col-6">
-                        <a href="/doctor-profile/{{asset($doctor->user->username)}}" class="btn view-btn">View Profile</a>
+                        <a href="/doctor-profile/{{$doctor->user->username}}" class="btn view-btn">View Profile</a>
                     </div>
                     <div class="col-6">
-                        <a href="/booking/{{asset($doctor->user->username)}}" class="btn book-btn">Book Now</a>
+                        <a href="/booking/{{$doctor->user->username}}" class="btn book-btn">Book Now</a>
                     </div>
                 </div>
             </div>

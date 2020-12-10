@@ -2366,7 +2366,7 @@ __webpack_require__.r(__webpack_exports__);
     getgallery: function getgallery() {
       var _this2 = this;
 
-      axios.get("/doctor/clinic/gallery/all").then(function (response) {
+      axios.post("/doctor/clinic/gallery/all").then(function (response) {
         _this2.gallery = response.data;
       })["catch"](function (error) {});
     }
@@ -2391,21 +2391,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["clinic", "isfound"],
+  props: ["clinic"],
   data: function data() {
-    return {};
+    return {
+      isfound: 0
+    };
   },
   methods: {
     AddFavourite: function AddFavourite() {
+      var _this = this;
+
       axios.post("/patient/favourite", {
         clinic_id: this.clinic
       }).then(function (response) {
-        alert(response.data);
-      })["catch"](function (error) {
-        alert(response.data.errors);
-      });
+        _this.isfound = response.data;
+      })["catch"](function (error) {});
+    },
+    MyFavourite: function MyFavourite() {
+      var _this2 = this;
+
+      axios.post("/patient/myfavourite", {
+        clinic_id: this.clinic
+      }).then(function (response) {
+        _this2.isfound = response.data;
+      })["catch"](function (error) {});
     }
+  },
+  mounted: function mounted() {
+    this.MyFavourite();
   }
 });
 
@@ -43082,7 +43100,8 @@ var render = function() {
     _c(
       "a",
       {
-        staticClass: "btn btn-danger fav-btn",
+        staticClass: "btn fav-btn",
+        class: _vm.isfound == 1 ? "btn-danger" : "btn-white",
         on: { click: _vm.AddFavourite }
       },
       [_c("i", { staticClass: "far fa-bookmark" })]

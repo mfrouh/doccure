@@ -5,7 +5,7 @@
 @section('dcontent')
 <div class="doc-review review-listing">
 	<ul class="comments-list">
-        @foreach (auth()->user()->doctor->clinic->reviews as $review)
+        @forelse (auth()->user()->doctor->clinic->reviews as $review)
 		<li>
 			<div class="comment">
 				<img class="avatar rounded-circle" alt="User Image" src="{{asset($review->patient->user->image)}}">
@@ -27,7 +27,11 @@
 				</div>
 			</div>
         </li>
-        @endforeach
+        @empty
+        <li class="text-center">
+            Not Found Review
+        </li>
+        @endforelse
     </ul>
 </div>
 @endsection

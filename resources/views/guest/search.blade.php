@@ -37,7 +37,7 @@
                             @foreach ($specialities as $speciality)
 							<div>
 								<label class="custom_check">
-									<input type="checkbox" name="specialist[]"  value="{{$speciality->name}}">
+									<input type="checkbox" name="specialist[]"  value="{{$speciality->id}}">
 									<span class="checkmark"></span> {{$speciality->name}}
 								</label>
                             </div>
@@ -51,7 +51,7 @@
                    </form>
 				</div>
 				<div class="col-md-12 col-lg-8 col-xl-9">
-                      @foreach ($clinics as $clinic)
+                      @forelse ($clinics as $clinic)
 					<div class="card">
 						<div class="card-body">
 							<div class="doctor-widget">
@@ -108,7 +108,14 @@
 							</div>
 						</div>
                       </div>
-                      @endforeach
+                      @empty
+                      <div class="card">
+                          <div class="card-body text-center">
+                            Not Found Doctors
+                          </div>
+                      </div>
+
+                      @endforelse
 				</div>
 			</div>
 		</div>

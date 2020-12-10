@@ -25,6 +25,11 @@ class MainController extends Controller
        $doctors=Doctor::whereIn('id',$clinics)->get();
        return view('patient.main.favourites',compact('doctors'));
     }
+    public function myfavourite(Request $request)
+    {
+        $favourite=Favourites::where('patient_id',auth()->user()->patient->id)->where('clinic_id',$request->clinic_id)->first();
+        return response(1);
+    }
     public function postfavourite(Request $request)
     {
         $this->validate($request,['clinic_id'=>'numeric|required']);
@@ -34,12 +39,12 @@ class MainController extends Controller
             $favourite->patient_id=auth()->user()->patient->id;
             $favourite->clinic_id=$request->clinic_id;
             $favourite->save();
-            return response('Favourite');
+            return response(1);
         }
         else
         {
              $favourite->delete();
-             return response('UnFavourite');
+             return response(0);
         }
     }
     public function prescriptions()

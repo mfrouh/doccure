@@ -1,16 +1,22 @@
 <template>
   <div>
-    <a class="btn btn-danger fav-btn" @click="AddFavourite">
+    <a
+      class="btn fav-btn"
+      :class="isfound == 1 ? 'btn-danger' : 'btn-white'"
+      @click="AddFavourite"
+    >
       <i class="far fa-bookmark"></i>
     </a>
   </div>
 </template>
 <script>
 export default {
-  props: ["clinic", "isfound"],
+  props: ["clinic"],
 
   data() {
-    return {};
+    return {
+      isfound: 0,
+    };
   },
   methods: {
     AddFavourite() {
@@ -19,12 +25,23 @@ export default {
           clinic_id: this.clinic,
         })
         .then((response) => {
-          alert(response.data);
+          this.isfound = response.data;
         })
-        .catch((error) => {
-          alert(response.data.errors);
-        });
+        .catch((error) => {});
     },
+    MyFavourite() {
+      axios
+        .post("/patient/myfavourite", {
+          clinic_id: this.clinic,
+        })
+        .then((response) => {
+          this.isfound = response.data;
+        })
+        .catch((error) => {});
+    },
+  },
+  mounted() {
+    this.MyFavourite();
   },
 };
 </script>

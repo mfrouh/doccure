@@ -91,7 +91,7 @@ Route::group(['prefix' => 'doctor','middleware'=>['auth','Checkrole:doctor']], f
     Route::post('/clinic/create', 'Doctor\ClinicController@store');
     Route::post('/clinic/gallery', 'Doctor\ClinicController@gallery');
     Route::post('/clinic/gallery/delete', 'Doctor\ClinicController@delete');
-    Route::get('/clinic/gallery/all', 'Doctor\ClinicController@all');
+    Route::post('/clinic/gallery/all', 'Doctor\ClinicController@all');
     //Doctor prescription
     Route::get('prescriptions', 'Doctor\PrescriptionController@index');
     Route::post('prescriptions', 'Doctor\PrescriptionController@getprescriptions');
@@ -115,6 +115,7 @@ Route::group(['prefix' => 'patient','middleware'=>['auth','Checkrole:patient']],
     //favourites doctor
     Route::get('favourites', 'Patient\MainController@favourites');
     Route::post('favourite', 'Patient\MainController@postfavourite');
+    Route::post('myfavourite', 'Patient\MainController@myfavourite');
     //setting information
     Route::get('setting', 'Patient\SettingController@setting');
     Route::post('setting', 'Patient\SettingController@postsetting');

@@ -72,7 +72,7 @@ export default {
     },
     getgallery() {
       axios
-        .get("/doctor/clinic/gallery/all")
+        .post("/doctor/clinic/gallery/all")
         .then((response) => {
           this.gallery = response.data;
         })

@@ -7,6 +7,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
+                    <form action="" method="get">
 					<div class="card search-filter">
 						<div class="card-header">
 							<h4 class="card-title mb-0">Search Filter</h4>
@@ -14,31 +15,32 @@
 						<div class="card-body">
 						<div class="filter-widget">
                             <h4>Name</h4>
-							<input type="text" class="form-control" name="name">
+                          <input type="text" class="form-control" name="name" value="">
 						</div>
 						<div class="filter-widget">
 							<h4>Gender</h4>
 							<div>
 								<label class="custom_check">
-									<input type="checkbox" name="gender" >
+									<input type="checkbox" name="gender[]" value="male" >
 									<span class="checkmark"></span> Male Doctor
 								</label>
 							</div>
 							<div>
 								<label class="custom_check">
-									<input type="checkbox" name="gender">
+									<input type="checkbox" name="gender[]" value="female">
 									<span class="checkmark"></span> Female Doctor
 								</label>
 							</div>
 						</div>
 							<div class="btn-search">
-								<button type="button" class="btn btn-block">Search</button>
+								<input type="submit" class="btn btn-block" value="Search"></button>
 							</div>
 						</div>
-					</div>
+                    </div>
+                   </form>
 				</div>
 				<div class="col-md-12 col-lg-8 col-xl-9">
-                      @foreach ($clinics as $clinic)
+                      @forelse ($clinics as $clinic)
 					<div class="card">
 						<div class="card-body">
 							<div class="doctor-widget">
@@ -95,7 +97,14 @@
 							</div>
 						</div>
                       </div>
-                      @endforeach
+                      @empty
+                      <div class="card">
+                          <div class="card-body text-center">
+                            Not Found Doctors
+                          </div>
+                      </div>
+
+                      @endforelse
 				</div>
 			</div>
 		</div>

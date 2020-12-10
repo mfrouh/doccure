@@ -31,6 +31,25 @@ class MainController extends Controller
     public function search(Request $request)
     {
        $specialities=Speciality::all();
+       $user=User::where('role','doctor');
+       if ($request->name) {
+        $user->where('name','like',"%$request->name%");
+       }
+       if ($request->gender) {
+        $user->whereIn('gender',$request->gender);
+       }
+       $users=$user->pluck('id');
+       $doctor=Doctor::whereIn('user_id',$users);
+       if ($request->specialist) {
+        $doctor->whereIn('speciality_id',$request->specialist);
+       }
+       $doctors=$doctor->pluck('id');
+       $clinics=Clinic::whereIn('doctor_id',$doctors)->get();
+       return view('guest.search',compact('specialities','clinics'));
+    }
+    public function speciality($name,Request $request)
+    {
+       $speciality=Speciality::where('name',$name)->firstOrfail();
        $user=User::query();
        if ($request->name) {
         $user->where('name','like',"%$request->name%");
@@ -39,14 +58,7 @@ class MainController extends Controller
         $user->whereIn('gender',$request->gender);
        }
         $users=$user->pluck('id');
-       $doctors=Doctor::whereIn('user_id',$users)->pluck('id');
-       $clinics=Clinic::whereIn('doctor_id',$doctors)->get();
-       return view('guest.search',compact('specialities','clinics'));
-    }
-    public function speciality($name)
-    {
-       $speciality=Speciality::where('name',$name)->firstOrfail();
-       $doctor=Doctor::where('speciality_id',$speciality->id)->get('id');
+       $doctor=Doctor::where('speciality_id',$speciality->id)->whereIn('user_id',$users)->get('id');
        $clinics=Clinic::whereIn('doctor_id',$doctor)->get();
        return view('guest.speciality',compact('speciality','clinics'));
     }
