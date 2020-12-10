@@ -22,10 +22,4 @@
     <textarea class="form-control"  readonly rows="4">{{$appointment->diagnose}}</textarea>
   </div>
 </div>
-<h3>Follow Ups</h3>
-<followups :followups="{{ $appointment->followups }}" :patient="{{$appointment->patient->id}}"></followups>
-<h3>Surgeries</h3>
-<surgeries :surgeries="{{ $surgeries }}" :patient="{{$appointment->patient->id}}"></surgeries>
-<h3>Prescriptions</h3>
-<prescriptions :prescriptions="{{ $prescriptions }}" :patient="{{$appointment->patient->id}}"></prescriptions>
 @endsection

@@ -2166,6 +2166,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["clinic", "doctor"],
@@ -42739,186 +42745,166 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.days[0]
-    ? _c("div", { staticClass: "container" }, [
-        _vm.step != 3
-          ? _c(
-              "div",
-              { staticClass: "card booking-schedule schedule-widget" },
-              [
-                _c("div", { staticClass: "schedule-header" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _vm.step == 1
-                        ? _c("div", { staticClass: "day-slot text-center" }, [
-                            _vm._m(0)
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.step == 2
-                        ? _c("div", { staticClass: "day-slot text-center" }, [
-                            _c("h1", [
-                              _c("span", { staticClass: "slot-date" }, [
-                                _vm._v(_vm._s(_vm.day))
-                              ])
-                            ])
-                          ])
-                        : _vm._e()
+  return _c("div", { staticClass: "container" }, [
+    _vm.step != 3
+      ? _c("div", { staticClass: "card booking-schedule schedule-widget" }, [
+          _c("div", { staticClass: "schedule-header" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _vm.step == 1
+                  ? _c("div", { staticClass: "day-slot text-center" }, [
+                      _vm._m(0)
                     ])
-                  ])
-                ]),
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "schedule-cont" }, [
-                  _vm.step == 1
-                    ? _c(
-                        "div",
-                        { staticClass: "row" },
-                        _vm._l(_vm.days, function(d, id) {
-                          return _c(
-                            "div",
-                            { key: id, staticClass: "col-md-2 p-2" },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-sm",
-                                  class:
-                                    d === _vm.day
-                                      ? "btn-secondary"
-                                      : "btn-success",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.SetDay(d)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("span", [
-                                    _vm._v(_vm._s(_vm._f("Fday")(d)))
-                                  ])
-                                ]
-                              )
-                            ]
-                          )
-                        }),
-                        0
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.step == 2
-                    ? _c(
-                        "div",
-                        { staticClass: "row" },
-                        _vm._l(_vm.times, function(t, id) {
-                          return _c(
-                            "div",
-                            { key: id, staticClass: "col-md-2 p-2" },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "btn btn-sm",
-                                  class:
-                                    t.time === _vm.time && t.booked == 0
-                                      ? "btn-secondary"
-                                      : t.booked == 1
-                                      ? "btn-danger disabled"
-                                      : "btn-success",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.SetTime(t.time)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("span", [
-                                    _vm._v(_vm._s(_vm._f("Ftime")(t.time)))
-                                  ])
-                                ]
-                              )
-                            ]
-                          )
-                        }),
-                        0
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer" }, [
-                  _vm.step == 1 && _vm.day != ""
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-info btn-sm float-right",
-                          on: { click: _vm.NextStep }
-                        },
-                        [_c("span", [_vm._v("Select Time")])]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.step == 2
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-info btn-sm float-left",
-                          on: { click: _vm.BackStep }
-                        },
-                        [_c("span", [_vm._v("Back")])]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.step == 2 && _vm.time != ""
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary btn-sm float-right",
-                          on: { click: _vm.Booking }
-                        },
-                        [_c("span", [_vm._v("save")])]
-                      )
-                    : _vm._e()
-                ])
-              ]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.step == 3
-          ? _c("div", { staticClass: "card success-card" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "success-cont" }, [
-                  _c("i", { staticClass: "fas fa-check" }),
-                  _vm._v(" "),
-                  _c("h3", [_vm._v("Appointment booked Successfully!")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("\n          Appointment booked with "),
-                    _c("strong", [_vm._v(" " + _vm._s(_vm.doctor))]),
-                    _c("br"),
-                    _vm._v("\n          on "),
-                    _c("strong", [
-                      _vm._v(
-                        _vm._s(_vm._f("Fday")(_vm.day)) +
-                          " " +
-                          _vm._s(_vm._f("Ftime")(_vm.time))
-                      )
+                _vm.step == 2
+                  ? _c("div", { staticClass: "day-slot text-center" }, [
+                      _c("h1", [
+                        _c("span", { staticClass: "slot-date" }, [
+                          _vm._v(_vm._s(_vm.day))
+                        ])
+                      ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary view-inv-btn",
-                      attrs: { href: "/patient/appointments" },
-                      on: { click: _vm.clear }
-                    },
-                    [_vm._v("View Appointments")]
-                  )
-                ])
+                  : _vm._e()
               ])
             ])
-          : _vm._e()
-      ])
-    : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "schedule-cont" }, [
+            _vm.step == 1
+              ? _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.days, function(d, id) {
+                    return _c("div", { key: id, staticClass: "col-md-2 p-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-sm",
+                          class:
+                            id === _vm.day && d == 0
+                              ? "btn-secondary"
+                              : d == 1
+                              ? "btn-danger disabled"
+                              : "btn-success",
+                          on: {
+                            click: function($event) {
+                              return _vm.SetDay(id)
+                            }
+                          }
+                        },
+                        [_c("span", [_vm._v(_vm._s(_vm._f("Fday")(id)))])]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.step == 2
+              ? _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(_vm.times, function(t, id) {
+                    return _c("div", { key: id, staticClass: "col-md-2 p-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-sm",
+                          class:
+                            t.time === _vm.time && t.booked == 0
+                              ? "btn-secondary"
+                              : t.booked == 1
+                              ? "btn-danger disabled"
+                              : "btn-success",
+                          on: {
+                            click: function($event) {
+                              return _vm.SetTime(t.time)
+                            }
+                          }
+                        },
+                        [_c("span", [_vm._v(_vm._s(_vm._f("Ftime")(t.time)))])]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-footer" }, [
+            _vm.step == 1 && _vm.day != ""
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-info btn-sm float-right",
+                    on: { click: _vm.NextStep }
+                  },
+                  [_c("span", [_vm._v("Select Time")])]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.step == 2
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-info btn-sm float-left",
+                    on: { click: _vm.BackStep }
+                  },
+                  [_c("span", [_vm._v("Back")])]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.step == 2 && _vm.time != ""
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary btn-sm float-right",
+                    on: { click: _vm.Booking }
+                  },
+                  [_c("span", [_vm._v("save")])]
+                )
+              : _vm._e()
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.step == 3
+      ? _c("div", { staticClass: "card success-card" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("div", { staticClass: "success-cont" }, [
+              _c("i", { staticClass: "fas fa-check" }),
+              _vm._v(" "),
+              _c("h3", [_vm._v("Appointment booked Successfully!")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("\n          Appointment booked with "),
+                _c("strong", [_vm._v(" " + _vm._s(_vm.doctor))]),
+                _c("br"),
+                _vm._v("\n          on "),
+                _c("strong", [
+                  _vm._v(
+                    _vm._s(_vm._f("Fday")(_vm.day)) +
+                      " " +
+                      _vm._s(_vm._f("Ftime")(_vm.time))
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-primary view-inv-btn",
+                  attrs: { href: "/patient/appointments" },
+                  on: { click: _vm.clear }
+                },
+                [_vm._v("View Appointments")]
+              )
+            ])
+          ])
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = [
   function() {

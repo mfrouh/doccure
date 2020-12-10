@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="days[0]">
+  <div class="container">
     <div class="card booking-schedule schedule-widget" v-if="step != 3">
       <div class="schedule-header">
         <div class="row">
@@ -21,11 +21,17 @@
         <div class="row" v-if="step == 1">
           <div class="col-md-2 p-2" v-for="(d, id) in days" :key="id">
             <a
-              @click="SetDay(d)"
+              @click="SetDay(id)"
               class="btn btn-sm"
-              :class="d === day ? 'btn-secondary' : 'btn-success'"
+              :class="
+                id === day && d == 0
+                  ? 'btn-secondary'
+                  : d == 1
+                  ? 'btn-danger disabled'
+                  : 'btn-success'
+              "
             >
-              <span>{{ d | Fday }}</span>
+              <span>{{ id | Fday }}</span>
             </a>
           </div>
         </div>

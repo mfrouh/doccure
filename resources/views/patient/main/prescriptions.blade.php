@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($prescriptions as $prescription)
+                    @forelse ($prescriptions as $prescription)
                     <tr>
                         <td>{{$prescription->created_at->format('d M Y')}}</td>
                         <td>
@@ -27,16 +27,19 @@
                         <td>{{$prescription->clinic->doctor->speciality->name}}</td>
                         <td class="text-right">
                             <div class="table-action">
-                                <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                                    <i class="fas fa-print"></i> Print
-                                </a>
-                                <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                <a href="/patient/prescription/{{$prescription->id}}" class="btn btn-sm bg-info-light">
                                     <i class="far fa-eye"></i> View
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            Not Found Prescription
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

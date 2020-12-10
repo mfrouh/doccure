@@ -1,7 +1,7 @@
 @extends('layout.patient')
 @section('pcontent')
 <div class="row row-grid">
-    @foreach ($doctors as $doctor)
+    @forelse ($doctors as $doctor)
     <div class="col-md-6 col-lg-4 col-xl-3">
         <div class="profile-widget">
             <div class="doc-img">
@@ -46,6 +46,15 @@
             </div>
         </div>
     </div>
-    @endforeach
+    @empty
+    <div class="col-12">
+        <div class="card ">
+          <div class="card-body text-center">
+            Not Found Doctors
+          </div>
+        </div>
+    </div>
+
+    @endforelse
 </div>
 @endsection

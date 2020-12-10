@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($surgeries as $surgery)
+                    @forelse ($surgeries as $surgery)
                     <tr>
                         <td>{{$surgery->name}}</td>
                         <td>
@@ -31,7 +31,11 @@
                         <td>{{$surgery->hospital_name}}</td>
                         <td>{{$surgery->price}}</td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr><td colspan="6" class="text-center">
+                      Not Found Surgeries
+                        </td></tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

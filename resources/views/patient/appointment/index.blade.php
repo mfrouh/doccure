@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($appointments as $k=> $appointment)
+                    @forelse ($appointments as $k=> $appointment)
                     <tr>
                         <td>
                             <h2 class="table-avatar">
@@ -31,8 +31,13 @@
                         <td><span class="badge badge-pill bg-warning-light">{{$appointment->state}}</span></td>
                         <td><a href="/patient/appointment/{{$appointment->id}}" class="btn btn-primary btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                     </tr>
-
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            Not Found Appointments
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

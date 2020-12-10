@@ -87,8 +87,17 @@ class AppointmentController extends Controller
     }
     public function day(Request $request)
     {
+     $mydays=array();
      $days=AppointmentTime::where('clinic_id',$request->clinic)->pluck('day');
-     return response($days->unique());
+     foreach ($days as $key => $day) {
+        $appointment=Appointment::where('clinic_id',$request->clinic)->where('patient_id',auth()->user()->patient->id)->where('day',$day)->first();
+        if ($appointment) {
+            $mydays[$day]=1;
+        }else {
+            $mydays[$day]=0;
+        }
+     }
+     return response($mydays);
     }
 
     public function destroy(Appointment $appointment)
