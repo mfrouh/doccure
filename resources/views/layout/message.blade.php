@@ -1,5 +1,5 @@
 @if (session('errors'))
-<div class="alert alert-danger alert-dismissible fade show" style="position: absolute;bottom:0; z-index:10;" role="alert">
+<div class="alert alert-danger alert-dismissible fade show" style="position: absolute;bottom:0;right:0; z-index:9999;" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -13,7 +13,7 @@
 @endif
 
 @if (session('success'))
-<div class="alert alert-success alert-dismissible fade show" style="position: absolute;bottom:0; z-index:10;" role="alert">
+<div class="alert alert-success alert-dismissible fade show" style="position: absolute;bottom:0;right:0; z-index:9999;" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
