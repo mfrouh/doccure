@@ -19,8 +19,8 @@ class CreateSurgeriesTable extends Migration
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade')->onUpdate('cascade');
-            $table->integer('surgeryable_id');
-            $table->string('surgeryable_type');
+            $table->foreignId('appointment_id');
+            $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->date('day');
             $table->time('time');

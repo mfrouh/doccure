@@ -18,15 +18,15 @@
                   <a href="#" class="avatar avatar-sm mr-2">
                     <img class="avatar-img rounded-circle" alt="User Image" />
                   </a>
-                  <a>{{ prescription.patient.user.name }}</a>
+                  <a>{{ prescription.patientname }}</a>
                 </h2>
               </td>
               <td class="text-right">
                 <div class="table-action">
-                  <a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-                    <i class="fas fa-print"></i> Print
-                  </a>
-                  <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                  <a
+                    :href="'/doctor/prescription/' + prescription.id"
+                    class="btn btn-sm bg-info-light"
+                  >
                     <i class="far fa-eye"></i> View
                   </a>
                 </div>

@@ -5,6 +5,9 @@ Appointment
 @section('dcontent')
 <div class="card">
   <div class="card-header">Appointment</div>
+  <div class="card-header">
+    <appointment :appointment ="{{ $appointment }}"></appointment>
+  </div>
   <div class="card-body">
     <div class="profile-sidebar">
         <div class="widget-profile pro-widget-content">
@@ -20,7 +23,6 @@ Appointment
     </div>
     <label for="">Diagnose</label>
     <textarea class="form-control"  readonly rows="4">{{$appointment->diagnose}}</textarea>
-          {{--  <appointment :appointment ="{{ $appointment }}"></appointment>  --}}
   </div>
 </div>
 <h3>Follow Ups</h3>

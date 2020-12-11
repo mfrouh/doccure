@@ -4,7 +4,7 @@
       <div class="schedule-header">
         <div class="row">
           <div class="col-md-12">
-            <div class="day-slot text-center" v-if="step == 1">
+            <div class="day-slot text-center" v-if="step == 1 && day">
               <h1>
                 <span class="slot-date">Select Day</span>
               </h1>

@@ -9,11 +9,12 @@ class Surgery extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'clinic_id','patient_id','surgeryable_id','surgeryable_type',
+        'clinic_id','patient_id','appointment_id'
      ];
-    public function surgeryable()
+    protected $appends=['patientname','patientimage'];
+    public function appointment()
     {
-      return $this->morphTo();
+        return $this->belongsTo('App\Models\Appointment');
     }
     public function clinic()
     {
@@ -22,5 +23,13 @@ class Surgery extends Model
     public function patient()
     {
         return $this->belongsTo('App\Models\Patient');
+    }
+    public function getPatientimageAttribute()
+    {
+        return  asset($this->patient->user->image);
+    }
+    public function getPatientnameAttribute()
+    {
+        return $this->patient->user->name;
     }
 }

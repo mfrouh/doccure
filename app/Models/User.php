@@ -67,10 +67,6 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Patient');
     }
-    public function step()
-    {
-        return $this->hasOne('App\Models\Step');
-    }
     public function social()
     {
         return $this->hasOne('App\Models\Social');

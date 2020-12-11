@@ -29,6 +29,17 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{asset('assets_admin/css/style.css')}}">
+    <style>
+ .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #21202047;
+}
+    </style>
 </head>
 <body>
     <div class="main-wrapper">

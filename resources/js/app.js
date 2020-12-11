@@ -3,7 +3,9 @@ require('./bootstrap');
 import Vue from 'vue';
 import moment from 'moment';
 Vue.use(require('vue-moment'));
+import { BootstrapVue } from 'bootstrap-vue'
 
+Vue.use(BootstrapVue)
 
 // import { InertiaApp } from '@inertiajs/inertia-vue';
 // import { InertiaForm } from 'laravel-jetstream';

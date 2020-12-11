@@ -20,13 +20,4 @@ class FollowUp extends Model
     {
         return $this->belongsTo('App\Models\Patient');
     }
-    public function prescription()
-    {
-        return $this->morphOne('App\Models\Prescription','prescriptionable');
-    }
-    public function surgeries()
-    {
-        return $this->morphMany('App\Models\Surgery','surgeryable');
-    }
-
 }

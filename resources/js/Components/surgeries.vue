@@ -11,17 +11,18 @@
               <th>Time</th>
               <th>Hospital Name</th>
               <th>Price</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(surgery, id) in surgeries" :key="id">
+            <tr v-for="(surgery, id) in mysurgeries" :key="id">
               <td>{{ surgery.name }}</td>
               <td>
                 <h2 class="table-avatar">
                   <a href="#" class="avatar avatar-sm mr-2">
-                    <img class="avatar-img rounded-circle" />
+                    <img :src="surgery.patientimage" class="avatar-img rounded-circle" />
                   </a>
-                  <a>{{ surgery.patient.user.name }}</a>
+                  <a>{{ surgery.patientname }}</a>
                 </h2>
               </td>
               <td>{{ surgery.day }}</td>
@@ -30,7 +31,9 @@
               <td>{{ surgery.price }}</td>
               <td class="text-right">
                 <div class="table-action">
-                  <a><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a class="btn btn-sm bg-info-light" @click="deletesurgery(surgery.id)"
+                    ><i class="fa fa-trash" aria-hidden="true"></i
+                  ></a>
                 </div>
               </td>
             </tr>
@@ -57,6 +60,14 @@ export default {
         })
         .then((response) => {
           this.mysurgeries = response.data;
+        })
+        .catch((error) => {});
+    },
+    deletesurgery($id) {
+      axios
+        .delete("/doctor/surgery/" + $id)
+        .then((response) => {
+          this.Getsurgeries();
         })
         .catch((error) => {});
     },

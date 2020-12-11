@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\Surgery;
 use Illuminate\Http\Request;
 
@@ -51,15 +52,21 @@ class SurgeryController extends Controller
             'time'=>'required',
             'price'=>'required|numeric',
             'hospital_name'=>'required',
+            'appointment'=>'required'
         ]);
+        $appointment=Appointment::where('id',$request->appointment)->firstorfail();
         $surgery=new Surgery();
+        $surgery->surgeryable_id=$appointment->id;
+        $surgery->surgeryable_type="App\Models\Appointment";
+        $surgery->patient_id=$appointment->patient_id;
+        $surgery->clinic_id=$appointment->clinic_id;
         $surgery->name=$request->name;
         $surgery->day=$request->day;
         $surgery->time=$request->time;
         $surgery->price=$request->price;
         $surgery->hospital_name=$request->hospital_name;
         $surgery->save();
-        return back()->with('success','Create Surgery');
+        return response('Create Surgery');
     }
 
     /**
@@ -118,6 +125,6 @@ class SurgeryController extends Controller
     public function destroy(Surgery $surgery)
     {
         $surgery->delete();
-        return back()->with('success','Delete Surgery');
+        return response('Delete Surgery');
     }
 }
