@@ -47,7 +47,7 @@
 			<ul class="nav user-menu">
 				<li class="nav-item dropdown noti-dropdown">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-						<i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+						<i class="fe fe-bell"></i> <span class="badge badge-pill">{{auth()->user()->unreadnotifications->count()}}</span>
 					</a>
 					<div class="dropdown-menu notifications">
 						<div class="topnav-dropdown-header">
@@ -56,6 +56,7 @@
 						</div>
 						<div class="noti-content">
 							<ul class="notification-list">
+                                @foreach (auth()->user()->notifications as $notification)
 								<li class="notification-message">
 									<a href="#">
 										<div class="media">
@@ -68,7 +69,8 @@
 											</div>
 										</div>
 									</a>
-								</li>
+                                </li>
+                                @endforeach
 							</ul>
 						</div>
 						<div class="topnav-dropdown-footer">
@@ -78,20 +80,18 @@
 				</li>
 				<li class="nav-item dropdown has-arrow">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-						<span class="user-img"><img class="rounded-circle" src="{{asset('assets_admin/img/profiles/avatar-01.jpg')}}" width="31" alt="Ryan Taylor"></span>
+						<span class="user-img"><img class="rounded-circle" src="{{asset(auth()->user()->image)}}" width="31"></span>
 					</a>
 					<div class="dropdown-menu">
 						<div class="user-header">
 							<div class="avatar avatar-sm">
-								<img src="{{asset('assets_admin/img/profiles/avatar-01.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
+								<img src="{{asset(auth()->user()->image)}}" class="avatar-img rounded-circle">
 							</div>
 							<div class="user-text">
-								<h6>Ryan Taylor</h6>
+								<h6>{{auth()->user()->name}}</h6>
 								<p class="text-muted mb-0">Administrator</p>
 							</div>
 						</div>
-						<a class="dropdown-item" href="profile">My Profile</a>
-						<a class="dropdown-item" href="settings">Settings</a>
                         <a class="dropdown-item"href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">Logout</a>
@@ -123,6 +123,16 @@
                 <li  class="">
                     <a href="/admin/patients"><i class="fe fe-user"></i> <span>Patients</span></a>
                 </li>
+                <li  class="">
+                    <a href="/admin/reviews"><i class="fe fe-user"></i> <span>Reviews</span></a>
+                </li>
+                <li  class="">
+                    <a href="/admin/change-password"><i class="fe fe-user"></i> <span>Change Password </span></a>
+                </li>
+                <li  class="">
+                    <a href="/admin/setting"><i class="fe fe-user"></i> <span>Setting</span></a>
+                </li>
+
             </ul>
         </div>
     </div>

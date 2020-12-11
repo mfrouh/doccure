@@ -9,6 +9,7 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
+                        <a class="btn btn-primary float-right" href="/admin/speciality/create">Create</a>
 						<div class="table-responsive">
 							<table class="datatable table table-hover table-center mb-0">
 								<thead>
@@ -34,9 +35,6 @@
 											<div class="actions">
 												<a class="btn btn-sm bg-success-light"  href="/admin/speciality/{{$speciality->id}}/edit">
 													<i class="fe fe-pencil"></i>
-												</a>
-												<a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light">
-													<i class="fe fe-trash"></i>
 												</a>
 											</div>
 										</td>

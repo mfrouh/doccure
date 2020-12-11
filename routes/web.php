@@ -37,6 +37,13 @@ Route::group(['prefix' => 'admin','middleware'=>['auth','Checkrole:admin']], fun
     Route::get('appointments', 'Admin\MainController@appointments');
     Route::get('surgeries', 'Admin\MainController@surgeries');
     Route::get('reviews', 'Admin\MainController@reviews');
+    //change password
+    Route::get('change-password', 'Admin\SettingController@changepassword');
+    Route::post('change-password', 'Admin\SettingController@postchange');
+    //setting information
+    Route::get('setting', 'Admin\SettingController@setting');
+    Route::post('setting', 'Admin\SettingController@postsetting');
+
 
 
 });
