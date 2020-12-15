@@ -162,7 +162,7 @@
                 </li>
                 <li>
                     <a href="/doctor/reviews">
-                        <i class="fe fe-review"></i>
+                        <i class="fe fe-user-plus"></i>
                         <span>Reviews</span>
                     </a>
                 </li>
@@ -180,7 +180,7 @@
                 </li>
                 <li>
                     <a href="/doctor/change-password">
-                        <i class="fe fe-password"></i>
+                        <i class="fe fe-user-plus"></i>
                         <span>Change Password</span>
                     </a>
                 </li>

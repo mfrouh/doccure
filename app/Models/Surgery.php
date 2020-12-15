@@ -11,7 +11,7 @@ class Surgery extends Model
     protected $fillable = [
         'clinic_id','patient_id','appointment_id'
      ];
-    protected $appends=['patientname','patientimage'];
+    protected $appends=['patientname','patientimage','patientusername'];
     public function appointment()
     {
         return $this->belongsTo('App\Models\Appointment');
@@ -31,5 +31,9 @@ class Surgery extends Model
     public function getPatientnameAttribute()
     {
         return $this->patient->user->name;
+    }
+    public function getPatientusernameAttribute()
+    {
+        return $this->patient->user->username;
     }
 }

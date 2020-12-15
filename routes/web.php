@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
 Route::get('/doctor-register', function () {
     return view('auth.register-doctor');
 });
@@ -138,6 +134,7 @@ Route::group(['prefix' => 'patient','middleware'=>['auth','Checkrole:patient']],
     Route::get('surgeries', 'Patient\MainController@surgeries');
     //review doctor
     Route::post('/review', 'Patient\MainController@review');
-
-
 });
+;
+
+require __DIR__.'/auth.php';

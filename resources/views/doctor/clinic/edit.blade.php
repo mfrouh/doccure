@@ -9,6 +9,8 @@
         <div class="row form-row">
             <div class="col-md-12">
                 <dropzone></dropzone>
+                <form action="/doctor/clinic" method="POST">
+                    @csrf
                 <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

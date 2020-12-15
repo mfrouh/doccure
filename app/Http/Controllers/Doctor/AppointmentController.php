@@ -58,7 +58,7 @@ class AppointmentController extends Controller
       $appointment->attend=1;
       $appointment->diagnose=$request->diagnose;
       $appointment->save();
-      return response('Appointment Diagnose Save');
+      return response($appointment->diagnose);
     }
     public function show(Appointment $appointment)
     {

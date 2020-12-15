@@ -18,16 +18,17 @@ class FollowUpController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'appointment_id'=>'required',
+            'appointment'=>'required',
             'day'=>'required',
             'time'=>'required',
         ]);
         $followup =new FollowUp();
-        $followup->appointment_id=$request->appointment_id;
+        $followup->appointment_id=$request->appointment;
         $followup->day=$request->day;
         $followup->time=$request->time;
+        $followup->price=$request->price;
         $followup->save();
-        return back();
+        return response('FollowUp Created');
     }
     public function getfollowups(Request $request)
     {
@@ -35,13 +36,16 @@ class FollowUpController extends Controller
         if ($request->patient) {
          $app->where('patient_id',$request->patient);
         }
-        $appointments=$app->get();
+        if ($request->appointment) {
+            $app->where('id',$request->appointment);
+        }
+        $appointments=$app->pluck('id');
         $followups=FollowUp::whereIn('appointment_id',$appointments)->get();
         return response($followups);
     }
     public function destroy(FollowUp $followUp)
     {
         $followUp->delete();
-        return back();
+        return response("Delete FollowUp");
     }
 }

@@ -6,7 +6,7 @@
           <thead>
             <tr>
               <th>Date</th>
-              <th>Name</th>
+              <th>Patient Name</th>
               <th></th>
             </tr>
           </thead>
@@ -15,7 +15,10 @@
               <td>{{ prescription.created_at }}</td>
               <td>
                 <h2 class="table-avatar">
-                  <a href="#" class="avatar avatar-sm mr-2">
+                  <a
+                    :href="'/doctor/patient-profile/' + prescription.patientusername"
+                    class="avatar avatar-sm mr-2"
+                  >
                     <img class="avatar-img rounded-circle" alt="User Image" />
                   </a>
                   <a>{{ prescription.patientname }}</a>
@@ -65,7 +68,7 @@ export default {
   },
   filters: {
     Ftime: function (date) {
-      return moment("2020-12-12T" + date).format("HH:mm A");
+      return moment("2020-12-12T" + date).format("hh:mm A");
     },
   },
 };

@@ -104,7 +104,7 @@ export default {
   },
   filters: {
     Ftime: function (date) {
-      return moment("2020-12-12T" + date).format("HH:mm A");
+      return moment("2020-12-12T" + date).format("hh:mm A");
     },
   },
 };

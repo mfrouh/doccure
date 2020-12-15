@@ -29,7 +29,7 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{asset('assets_admin/plugins/datatables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    {{--  <link rel="stylesheet" href="{{ mix('css/app.css') }}">  --}}
     <style>
 .notifications {
 	padding: 0;

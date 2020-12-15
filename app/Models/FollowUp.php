@@ -8,16 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class FollowUp extends Model
 {
     use HasFactory;
+    protected $appends=[
+        'patientimg','patientname','patientusername'
+    ];
     public function appointment()
     {
         return $this->belongsTo('App\Models\Appointment');
     }
-    public function clinic()
+    public function getPatientimgAttribute()
     {
-        return $this->belongsTo('App\Models\Clinic');
+        return  asset($this->appointment->patient->user->image);
     }
-    public function patient()
+    public function getPatientnameAttribute()
     {
-        return $this->belongsTo('App\Models\Patient');
+        return $this->appointment->patient->user->name;
     }
+    public function getPatientusernameAttribute()
+    {
+        return $this->appointment->patient->user->username;
+    }
+
 }

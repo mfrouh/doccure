@@ -3,5 +3,5 @@
  Follow Ups
 @endsection
 @section('dcontent')
-    <followups :followups ="{{$followups}}"></followups>
+    <followups></followups>
 @endsection

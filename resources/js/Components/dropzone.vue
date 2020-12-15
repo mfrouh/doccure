@@ -3,7 +3,7 @@
     <div class="form-group">
       <label>Clinic Images</label>
       <vue-dropzone
-        ref="myVueDropzone"
+        ref="app"
         id="dropzone"
         :options="dropzoneOptions"
         v-on:vdropzone-success="uploadSuccess"
@@ -33,8 +33,8 @@
   </div>
 </template>
 <script>
-import vue2Dropzone from "vue2-dropzone";
-import "vue2-dropzone/dist/vue2Dropzone.min.css";
+// import vue2Dropzone from "vue2-dropzone";
+//import "vue2-dropzone/dist/vue2Dropzone.min.css";
 
 export default {
   components: {

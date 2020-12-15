@@ -34,6 +34,9 @@ class SurgeryController extends Controller
         if ($request->patient) {
          $app->where('patient_id',$request->patient);
         }
+        if ($request->appointment) {
+            $app->where('appointment_id',$request->appointment);
+        }
         $surgeries=$app->get();
         return response($surgeries);
     }
@@ -56,8 +59,7 @@ class SurgeryController extends Controller
         ]);
         $appointment=Appointment::where('id',$request->appointment)->firstorfail();
         $surgery=new Surgery();
-        $surgery->surgeryable_id=$appointment->id;
-        $surgery->surgeryable_type="App\Models\Appointment";
+        $surgery->appointment_id=$appointment->id;
         $surgery->patient_id=$appointment->patient_id;
         $surgery->clinic_id=$appointment->clinic_id;
         $surgery->name=$request->name;
@@ -106,7 +108,8 @@ class SurgeryController extends Controller
             'time'=>'required',
             'price'=>'required|numeric',
             'hospital_name'=>'required',
-        ]);
+            'appointment'=>'required'
+            ]);
         $surgery->name=$request->name;
         $surgery->day=$request->day;
         $surgery->time=$request->time;
